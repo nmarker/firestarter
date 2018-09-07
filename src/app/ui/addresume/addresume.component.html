@@ -1,0 +1,95 @@
+<!-- <div [ngSwitch]="state || null"> -->
+
+<div *ngIf="state === 'synced'" class="notification is-success">
+    Form is synced with Firestore
+</div>
+
+<div *ngIf="state === 'modified'" class="notification is-warning">
+    Form has unsaved changes
+</div>
+<!-- Getting an ERROR Error: ExpressionChangedAfterItHasBeenCheckedError -->
+<!-- <div *ngIf="state === 'loading'" class="notification is-info">
+    Form data is preloading
+</div> -->
+<div *ngIf="state === 'error'" class="notification is-danger">
+    Form tried and failed to save to Firestore
+</div> 
+<!-- </div> -->
+
+<hr>
+
+
+
+
+
+
+
+
+<form [formGroup]="myForm" fireForm path="contacts/test" (stateChange)="changeHandler($event)">
+
+    <div class="columns">
+        <div class="column">
+            <h3>Reactive Form Data</h3><br> {{ myForm.value | json }}
+        </div>
+
+        <div class="column">
+
+            <h3>Firestore Data</h3><br> {{ myDoc | async | json }}
+            <br>
+            trial: {{ myDoc.bio | async | json }}
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <hr>
+
+    <mat-form-field class="m-right">
+        <input matInput placeholder="email" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select formControlName="career" placeholder="career">
+            <mat-option value="Magician">Magician</mat-option>
+            <mat-option value="Clown">Clown</mat-option>
+            <mat-option value="Juggler">Juggler</mat-option>
+        </mat-select>
+    </mat-form-field><br>
+
+    <mat-form-field>
+        <textarea matInput placeholder="your bio" formControlName="bio"></textarea>
+    </mat-form-field>
+    <!-- {{skillArrayForm | async | json}} -->
+    <mat-form-field class="m-right">
+        <input matInput placeholder="skillarrayjson" formControlName="skillarrayjson">
+    </mat-form-field>
+
+    <div formArrayName="skillArrayForm" cellspacing="0">
+        <div *ngFor="let number of getskillForms.controls | async; let i = index" [formGroupName]="i">
+            <mat-form-field class="example-full-width">
+                <mat-select formControlName="skill" placeholder="skill">
+                    <mat-option value="Magician">Magician</mat-option>
+                    <mat-option value="Clown">Clown</mat-option>
+                    <mat-option value="Juggler">Juggler</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-radio-group formControlName="level">
+                <mat-radio-button value="Advanced">Advanced</mat-radio-button>
+                <mat-radio-button value="Medium">Medium</mat-radio-button>
+                <mat-radio-button value="Beginner">Beginner</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
+    <button mat-raised-button color="primary" type="button" (click)="addSkill()">add</button>
+
+    <hr> Fireform state: {{ state }} <br>
+    <hr>
+
+    <button mat-raised-button color="primary" [disabled]="myForm.invalid || state !== 'modified'">Save</button>
+
+
+</form>
