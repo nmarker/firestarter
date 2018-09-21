@@ -1,0 +1,19 @@
+<p>
+  viewresume works!
+  
+  <br>
+  <span *ngIf="resumeObservable | async as resume">
+    bio: <i>{{resume.bio}}</i><br>
+    career: <i>{{resume.career}}</i><br>
+    skill: <i>{{resume.skillArrayForm}}</i>
+
+    <ul>
+      <li *ngFor="let skills of resume.skillArrayForm">
+      {{ skills.level }} by {{ skills.skill }}
+      </li>
+    </ul>
+    
+  </span>
+  <br>
+  {{resumeObservable | async | json }}
+</p>

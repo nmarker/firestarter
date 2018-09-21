@@ -41,7 +41,7 @@
   <mat-form-field class="full-width">
       <input matInput placeholder="email" formControlName="email">
   </mat-form-field>
-  <mat-form-field class="full-width">
+  <!-- <mat-form-field class="full-width">
       <mat-select formControlName="career" placeholder="career">
           <mat-option value="Magician">Magician</mat-option>
           <mat-option value="Clown">Clown</mat-option>
@@ -50,7 +50,7 @@
   </mat-form-field><br>
   <mat-form-field class="full-width">
       <textarea matInput placeholder="your bio" formControlName="bio"></textarea>
-  </mat-form-field>
+  </mat-form-field> -->
   <mat-form-field class="full-width">
       <input matInput placeholder="Job Title" formControlName="jobtitle" name="jobtitle"
               maxlength="120"
@@ -64,23 +64,7 @@
         cdkAutosizeMinRows="5" cdkAutosizeMaxRows="10"  required></textarea>
     </mat-form-field>
     <p>{{ myDoc.skillArrayForm | async | json }}</p>
-    <div formArrayName="skillArrayForm" cellspacing="0">
-      <div *ngFor="let number of getskillForms.controls; let i = index" [formGroupName]="i">
-          <mat-form-field class="example-full-width">
-              <mat-select formControlName="skill" placeholder="skill">
-                  <mat-option value="Magician">Magician</mat-option>
-                  <mat-option value="Clown">Clown</mat-option>
-                  <mat-option value="Juggler">Juggler</mat-option>
-              </mat-select>
-          </mat-form-field>
-            <mat-radio-group formControlName="level">
-                <mat-radio-button value="Advanced">Advanced</mat-radio-button>
-                <mat-radio-button value="Medium">Medium</mat-radio-button>
-                <mat-radio-button value="Beginner">Beginner</mat-radio-button>
-              </mat-radio-group>
-            </div>
-    </div>
-
+    
     <button mat-raised-button color="primary" type="button" (click)="addSkill()">add</button>
   <hr> Fireform state: {{ state }} <br>
   <hr>

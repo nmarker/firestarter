@@ -15,13 +15,18 @@ import { PostjobComponent } from './postjob/postjob.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatMenuModule, MatInputModule, MatSnackBarModule,
+import { MatButtonModule, MatCheckboxModule, MatMenuModule, MatInputModule, MatSnackBarModule, MatDatepicker,
   MatToolbarModule, MatDialogModule, MatSidenavModule, MatNativeDateModule, MatExpansionModule,
   MatCardModule, MatTabsModule, MatIconModule, MatPaginatorModule, MatFormFieldModule, MatRadioModule, MatIcon,
- MatSortModule, MatTableModule, MatGridListModule, MatInput, MatSelectModule, MatDialog } from '@angular/material';
+ MatSortModule, MatTableModule, MatGridListModule, MatInput, MatSelectModule, MatDialog, MatDatepickerModule } from '@angular/material';
 import { FireFormDirective } from './fire-form.directive';
 import { AddresumeComponent } from './addresume/addresume.component';
-
+import { ViewresumeComponent } from './viewresume/viewresume.component';
+import { ResumelistComponent } from './resumelist/resumelist.component';
+import { AdListingComponent } from './ad-listing/ad-listing.component';
+import { ProfileComponent } from './profile/profile.component';
+import { DialogOverviewExampleDialog} from './profile/profile.component';
+import { DialogContentExampleDialog } from './profile/profile.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, ReactiveFormsModule,
@@ -32,7 +37,7 @@ import { AddresumeComponent } from './addresume/addresume.component';
     MatToolbarModule, MatDialogModule, 
     MatSidenavModule, MatNativeDateModule,MatExpansionModule,
     MatCardModule, MatTabsModule, MatRadioModule,
-    MatIconModule, MatFormFieldModule,
+    MatIconModule, MatFormFieldModule, MatDatepickerModule,
     MatTableModule, MatPaginatorModule, MatSortModule, 
     MatPaginatorModule, MatGridListModule, MatSelectModule,
     MatTabsModule, MatIconModule],
@@ -47,7 +52,13 @@ import { AddresumeComponent } from './addresume/addresume.component';
     SsrPageComponent,
     PostjobComponent,
     FireFormDirective,
-    AddresumeComponent
+    AddresumeComponent,
+    ViewresumeComponent,
+    ResumelistComponent,
+    AdListingComponent,
+    ProfileComponent,
+    DialogOverviewExampleDialog,
+    DialogContentExampleDialog
   ],
   exports: [
     MainNavComponent,
@@ -55,6 +66,8 @@ import { AddresumeComponent } from './addresume/addresume.component';
     NotificationMessageComponent,
     UserProfileComponent,
     UserFormComponent
-  ]
+  ],
+  entryComponents: [ DialogOverviewExampleDialog, DialogContentExampleDialog],
+  providers: []
 })
 export class UiModule {}

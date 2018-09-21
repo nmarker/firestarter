@@ -19,34 +19,12 @@
 <hr>
 
 
+<form [formGroup]="myForm" fireForm path="contacts/{{resumename}}" (stateChange)="changeHandler($event)">
 
-
-
-
-
-
-<form [formGroup]="myForm" fireForm path="contacts/test" (stateChange)="changeHandler($event)">
-
-    <div class="columns">
-        <div class="column">
-            <h3>Reactive Form Data</h3><br> {{ myForm.value | json }}
-        </div>
-
-        <div class="column">
-
-            <h3>Firestore Data</h3><br> {{ myDoc | async | json }}
-            <br>
-            trial: {{ myDoc.bio | async | json }}
-        </div>
-
-
-    </div>
-
-
-
-
-
-    <hr>
+    <mat-form-field class="m-right">
+        <input matInput placeholder="Candidate Name" formControlName="candidatename">
+    </mat-form-field>
+    
 
     <mat-form-field class="m-right">
         <input matInput placeholder="email" formControlName="email">
@@ -64,11 +42,11 @@
         <textarea matInput placeholder="your bio" formControlName="bio"></textarea>
     </mat-form-field>
     <!-- {{skillArrayForm | async | json}} -->
-    <mat-form-field class="m-right">
+    <!-- <mat-form-field class="m-right">
         <input matInput placeholder="skillarrayjson" formControlName="skillarrayjson">
-    </mat-form-field>
+    </mat-form-field> -->
 
-    <div formArrayName="skillArrayForm" cellspacing="0">
+    <!-- <div formArrayName="skillArrayForm" cellspacing="0">
         <div *ngFor="let number of getskillForms.controls | async; let i = index" [formGroupName]="i">
             <mat-form-field class="example-full-width">
                 <mat-select formControlName="skill" placeholder="skill">
@@ -84,12 +62,27 @@
             </mat-radio-group>
         </div>
     </div>
-    <button mat-raised-button color="primary" type="button" (click)="addSkill()">add</button>
+    <button mat-raised-button color="primary" type="button" (click)="addSkill()">add</button> -->
 
     <hr> Fireform state: {{ state }} <br>
     <hr>
 
     <button mat-raised-button color="primary" [disabled]="myForm.invalid || state !== 'modified'">Save</button>
+
+    <div class="columns">
+        <div class="column">
+            <h3>Reactive Form Data</h3><br> {{ myForm.value | json }}
+        </div>
+
+        <div class="column">
+
+            <h3>Firestore Data</h3><br> {{ myDoc | async | json }}
+            <br>
+            trial: {{ myDoc.bio | async | json }}
+        </div>
+
+
+    </div>
 
 
 </form>

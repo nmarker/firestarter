@@ -46,7 +46,7 @@ export class FireFormDirective implements OnInit, OnDestroy {
       .pipe(
         tap(doc => {
           if (doc) {
-            console.log('preloadData: ' + JSON.stringify(doc))
+            //console.log('preloadData: ' + JSON.stringify(doc))
             //this.formGroup.patchValue(doc);
             // this.formGroup.patchValue({
             //   email: 'nimeshmarker@path.com',
@@ -66,15 +66,16 @@ export class FireFormDirective implements OnInit, OnDestroy {
             console.log('###email: ' + doc['email'])
             console.log('@@' + JSON.stringify(doc['skillArrayForm']))
             this.formGroup.setValue({
+              candidatename: doc['candidatename'],
               email: doc['email'],
               career: doc['career'],
-              bio: doc['bio'],
-              skillarrayjson: JSON.stringify(doc['skillArrayForm']),
+              bio: doc['bio']
+              //skillarrayjson: JSON.stringify(doc['skillArrayForm']),
               //skillArrayForm: this.formGroup.setValue(doc['skillArrayForm'])
               //skillArrayForm: JSON.stringify(doc['skillArrayForm'])
               //skillArrayForm: this.getskillForms.setValue([ { level: "Advanced", skill: "Juggler" }])
               //skillArrayForm: this.formGroup.setValue([ { level: "Advanced", skill: "Juggler" }, { level: "Medium", skill: "Juggler" }, { level: "Beginner", skill: "Juggler" } ])
-              skillArrayForm: this.testparse(doc['skillArrayForm'])
+              //skillArrayForm: this.testparse(doc['skillArrayForm'])
             });
             console.log(this.formGroup)
             this.formGroup.markAsPristine();

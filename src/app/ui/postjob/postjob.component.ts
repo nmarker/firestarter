@@ -29,11 +29,12 @@ export class PostjobComponent implements OnInit {
       jobtitle: [''],
       jobdescription: [''],
       //skill:[''],
-      skillArrayForm: this.fb.array([])
+      //skillArrayForm: this.fb.array([])
     })
 
     var resumeid = ""
-    this.myDoc = this.afs.doc('contacts/test').valueChanges();
+    //this.myDoc = this.afs.doc('contacts/test').valueChanges();
+    this.myDoc = this.afs.doc('contacts').valueChanges();
   }
 
   // push new form control when user clicks add button

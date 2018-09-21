@@ -1,0 +1,78 @@
+
+
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Short tab">
+    <div class="example-small-box mat-elevation-z4">
+      Small content
+      <!-- <postjob></postjob> -->
+    </div>
+  </mat-tab>
+  <mat-tab label="Long tab">
+    <div class="example-large-box mat-elevation-z4 columns">
+      
+      <main class="column is-7">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        
+        <br>
+        
+        <mat-table #table [dataSource]="dataSource" 
+              [trackBy]="trackByUid" matSort class="animate">
+      
+              
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let hacker"> {{ hacker.name }} </mat-cell>
+          </ng-container>
+      
+      
+          <ng-container matColumnDef="age">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> age </mat-header-cell>
+            <mat-cell *matCellDef="let hacker"> {{ hacker.age }} <br> {{ hacker.email }} </mat-cell>
+          </ng-container>
+      
+      
+          <!-- <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+            <mat-cell *matCellDef="let hacker"> {{ hacker.email }} </mat-cell>
+          </ng-container> -->
+      
+      
+          <ng-container matColumnDef="phrase">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Phrase </mat-header-cell>
+            <mat-cell *matCellDef="let hacker"> {{ hacker.phrase }} </mat-cell>
+          </ng-container>
+      
+          <!-- <ng-container matColumnDef="edit">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
+              <mat-cell *matCellDef="let hacker"> 
+                <button mat-raised-button  color="primary" (click)="openDialog(hacker)">Edit</button> 
+              </mat-cell>
+          </ng-container> -->
+      
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)"></mat-row>
+      
+      </mat-table>
+    
+      <mat-paginator [length]="100"
+                    [pageSize]="10"
+                    [pageSizeOptions]="[2, 5, 10, 25, 100]">
+        </mat-paginator>
+      </main>
+      <aside class="column is-2">
+        <h5>show details</h5>
+        {{todisplayname}}
+        <br>
+        {{todisplayage}}
+        <br>
+        {{todisplayphrase}}
+      </aside>
+      </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+

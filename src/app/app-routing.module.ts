@@ -10,7 +10,10 @@ import { UploadPageComponent } from './uploads/upload-page/upload-page.component
 import { SsrPageComponent } from './ui/ssr-page/ssr-page.component';
 import { PostjobComponent } from './ui/postjob/postjob.component';
 import { AddresumeComponent } from './ui/addresume/addresume.component';
-
+import { ViewresumeComponent } from './ui/viewresume/viewresume.component';
+import { ResumelistComponent } from './ui/resumelist/resumelist.component';
+import { AdListingComponent } from './ui/ad-listing/ad-listing.component';
+import {ProfileComponent } from './ui/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -19,7 +22,11 @@ const routes: Routes = [
   { path: 'uploads',  component: UploadPageComponent,  canActivate: [AuthGuard] },
   { path: 'postjob', component: PostjobComponent},
   { path: 'addresume', component: AddresumeComponent },
-  { path: 'ssr', component: SsrPageComponent }
+  { path: 'viewresume', component: ViewresumeComponent },
+  { path: 'resumelist', component: ResumelistComponent },
+  { path: 'adlisting', component: AdListingComponent },
+  { path: 'ssr', component: SsrPageComponent },
+  { path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({

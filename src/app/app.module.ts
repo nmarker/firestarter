@@ -38,7 +38,7 @@ import { AngularFireFunctionsModule } from 'angularfire2/functions';
     NotesModule,
     UploadsModule,
     AngularFireModule.initializeApp(environment.firebase, 'firestarter'),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireFunctionsModule,

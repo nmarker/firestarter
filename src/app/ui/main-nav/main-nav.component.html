@@ -11,20 +11,54 @@
         </a>
     </div>
 
+      
+    <!-- User NOT logged in -->
+    <ng-template #guest>
+    <!-- <p class="card-text">Login to get started...</p> -->
+    <div class="navbar-end">
+        <a class="navbar-item" routerLink="/login">Login</a>
+        <a class="navbar-item" routerLink="/ssr">SSR Universal</a>
+        <a class="navbar-item" routerLink="/notes">Firestore</a>
+        <a class="navbar-item" routerLink="/uploads">File Uploads</a>
+    </div>
+    </ng-template>
+    
+    <!-- User logged in -->
+    <ng-template #authenticated>
+    <div class="navbar-end" *ngIf="auth.user | async as user">
+        <a class="navbar-item" [matMenuTriggerFor]="menu">Howdy, <i class="material-icons">
+            account_circle
+            </i>{{ user.displayName }}</a>
+        
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>dialpad</mat-icon>
+              <span>Redial</span>
+            </button>
+            <button mat-menu-item disabled>
+              <mat-icon>voicemail</mat-icon>
+              <span>Check voicemail</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <span>Disable alerts</span>
+            </button>
+          </mat-menu>
+        <!-- <a class="navbar-item mat-icon-button" [matMenuTriggerFor]="notifications"><i class="material-icons">
+            notification_important
+            </i></a>  
+        <mat-menu #notifications="matMenu"></mat-menu> -->
+        <a class="navbar-item" (click)="logout()">Logout <i class="material-icons">
+            exit_to_app
+            </i></a>
+    </div>
+    </ng-template>
+    
     <div class="navbar-menu" [ngClass]="{'is-active': show}">
-        <div class="navbar-end">
-            <a class="navbar-item" routerLink="/login">
-        Login
-      </a>
-            <a class="navbar-item" routerLink="/ssr">
-        SSR Universal
-      </a>
-            <a class="navbar-item" routerLink="/notes">
-        Firestore
-      </a>
-            <a class="navbar-item" routerLink="/uploads">
-        File Uploads
-      </a>
+        <div class="navbar-item"  *ngIf="auth.user | async; then authenticated else guest">
+            
+                    <!-- template will replace this div -->
+            
         </div>
     </div>
 </nav>
