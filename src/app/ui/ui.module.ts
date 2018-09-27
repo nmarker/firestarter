@@ -17,8 +17,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule, MatMenuModule, MatInputModule, MatSnackBarModule, MatDatepicker,
   MatToolbarModule, MatDialogModule, MatSidenavModule, MatNativeDateModule, MatExpansionModule,
-  MatCardModule, MatTabsModule, MatIconModule, MatPaginatorModule, MatFormFieldModule, MatRadioModule, MatIcon,
- MatSortModule, MatTableModule, MatGridListModule, MatInput, MatSelectModule, MatDialog, MatDatepickerModule } from '@angular/material';
+  MatCardModule, MatTabsModule, MatIconModule, MatPaginatorModule, MatFormFieldModule, MatRadioModule, MatIcon, MatListOption,
+ MatSortModule, MatTableModule, MatGridListModule, MatInput, MatSelectModule, MatDialog, MatDatepickerModule, MatListModule } from '@angular/material';
 import { FireFormDirective } from './fire-form.directive';
 import { AddresumeComponent } from './addresume/addresume.component';
 import { ViewresumeComponent } from './viewresume/viewresume.component';
@@ -27,6 +27,7 @@ import { AdListingComponent } from './ad-listing/ad-listing.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DialogOverviewExampleDialog} from './profile/profile.component';
 import { DialogContentExampleDialog } from './profile/profile.component';
+
 
 @NgModule({
   imports: [CommonModule, RouterModule, ReactiveFormsModule,
@@ -39,7 +40,7 @@ import { DialogContentExampleDialog } from './profile/profile.component';
     MatCardModule, MatTabsModule, MatRadioModule,
     MatIconModule, MatFormFieldModule, MatDatepickerModule,
     MatTableModule, MatPaginatorModule, MatSortModule, 
-    MatPaginatorModule, MatGridListModule, MatSelectModule,
+    MatPaginatorModule, MatGridListModule, MatSelectModule, MatListModule,
     MatTabsModule, MatIconModule],
   declarations: [
     UserLoginComponent,
