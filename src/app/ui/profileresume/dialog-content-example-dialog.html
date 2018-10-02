@@ -1,8 +1,9 @@
-<h2 mat-dialog-title>Confirm Delete</h2>
+<h2 mat-dialog-title><i class="material-icons">thumbs_up_down</i> Confirm Delete</h2>
 
 
 <mat-dialog-content class="mat-typography">
     <h1>{{data.displaytext}}</h1>
+    <h2>{{data.deletetype}}</h2>
     <ul>
         <li>
           <span *ngIf="data.animal === 'panda'">&#10003;</span> Panda

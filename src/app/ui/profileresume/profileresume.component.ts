@@ -12,7 +12,7 @@ import {
 
 
 export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
+  deletetype: 'experience' | 'education';
   displaytext: string;
 }
 
@@ -196,18 +196,32 @@ export class ProfileresumeComponent implements OnInit {
 
   }
 
-  openDialog() {
+  openDialog(deltype: string, todelete:number) {
     //const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
     const dialogRef = this.dialog.open(DialogContentExampleDialog, {
       data: {
-        animal: 'lion',
-        displaytext: 'todelete text'
+        deletetype: deltype,
+        displaytext: 'todelete id: ' + todelete
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      console.log('####' + result)
+      if (result == true)
+      {
+        console.log('in result check true')
+        switch (deltype)
+        {
+          case "experience":
+            console.log('in switch case')
+            this.deleteExperience(todelete)
+            break;
+          case "education":
+            break;
+        }
+      }
     });
   }
 
@@ -257,6 +271,7 @@ export class ProfileresumeComponent implements OnInit {
   }
 
   deleteExperience(i) {
+    console.log('in deleteExperience: ' + i)
     this.experienceForms.removeAt(i)
   }
   

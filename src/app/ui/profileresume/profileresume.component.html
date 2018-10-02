@@ -431,11 +431,11 @@
                                     </table>
                                 </div>
                                 <div>
-                                    <button mat-fab color="warn" (click)="deleteExperience(i)">
+                                    <button mat-fab color="warn" (click)="openDialog('experience', i)">
                                         <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                                     </button>
                                     <br><br>
-                                    <button mat-fab color="primary" (click)="openDialog()">
+                                    <button mat-fab color="primary" (click)="openDialog('experience',-1)">
                                         <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
                                     </button>
 
