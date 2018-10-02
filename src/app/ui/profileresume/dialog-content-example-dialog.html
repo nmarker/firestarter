@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Confirm Delete</h2>
+
+
+<mat-dialog-content class="mat-typography">
+    <h1>{{data.displaytext}}</h1>
+    <ul>
+        <li>
+          <span *ngIf="data.animal === 'panda'">&#10003;</span> Panda
+        </li>
+        <li>
+          <span *ngIf="data.animal === 'unicorn'">&#10003;</span> Unicorn
+        </li>
+        <li>
+          <span *ngIf="data.animal === 'lion'">&#10003;</span> Lion
+        </li>
+      </ul>
+  <h3>Are you sure?</h3>
+  <p> Vivamus varius lacus id elit venenatis aliquet. Duis vitae libero nisl. Sed vitae ligula id nisi ullamcorper vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique et sapien eget egestas. Proin gravida erat et turpis tincidunt, quis consectetur tellus aliquet. Vivamus eu sapien diam. Proin sit amet convallis magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec arcu nec ante auctor ultricies. Sed efficitur cursus rutrum. In molestie lectus eu nulla posuere ultricies. Nunc porta nunc vulputate, imperdiet tortor ac, sollicitudin ante. Donec in vulputate augue, a tempus purus. Aliquam posuere porttitor sodales. </p>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

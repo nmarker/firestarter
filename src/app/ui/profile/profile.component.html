@@ -11,413 +11,483 @@
     <button type="button" mat-button (click)="drawer.toggle()">
       Toggle sidenav
     </button> -->
-    <div class="columns">  
-      <div class="column is-12">
-        <div class="columns">
-          <div class="column is-10 is-offset-1">
-            <mat-tab-group dynamicHeight>
-              <mat-tab label="Basics">
-                <div class="example-large-box mat-elevation-z4">
-                  <div class="columns">
-                    <div class="column is-11">
-                      <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput placeholder="Candidate Name" formControlName="name">
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput placeholder="Location" formControlName="location">
-                            </mat-form-field>
-                          </td>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput placeholder="email" formControlName="email">
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <!-- <textarea matInput placeholder="Mini Resume" formControlName="miniresume"></textarea> -->
-                              <textarea matInput #message maxlength="256" placeholder="Mini Resume" formControlName="miniresume"></textarea>
-                              <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
-                              <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput placeholder="Role" formControlName="role">
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <textarea matInput placeholder="your message..." formControlName="message"></textarea>
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                      </table>
-
-                    </div>
-                  </div>
-                </div>
-              </mat-tab>
-              <mat-tab label="Talent Profile">
-                <div class="example-large-box mat-elevation-z4">
-                  <div class="columns">
-                    <div class="column is-11">
-                      <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <label class="label">Search status</label>
-                          </td>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <mat-select placeholder="Job Search Status" [(value)]="selected" formControlName="jobsearchstatus">
-                                <mat-option value="Actively Interviewing">Actively Interviewing</mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <label class="label">Job Type</label>
-                          </td>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <mat-select placeholder="Job Type" multiple formControlName="jobtype">
-                                <mat-option *ngFor="let job of typesOfJobs" [value]="job">{{job}}</mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                              <label class="label">Annual Salary</label>
-                          </td>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput formControlName="desiredannualsalary" placeholder="Desired Annual Salary" 
-                                      type="number" class="example-right-align">
-                              <span matPrefix>$&nbsp;</span>
-                              <span matSuffix>.00</span>
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput placeholder="Desired Location" type="text" formControlName="desiredlocation">
-                            </mat-form-field>
-                          </td>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                              <mat-checkbox formControlName="opentoworkremotely">Open to work remotely</mat-checkbox>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
-                              <label class="label">Work Authorization</label>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
-                            <table>
-                                <tr>
-                                  <td style="border-bottom-color:rgb(245, 243, 243);">
-                                    <h6>Are you legally authorized to work in the United States</h6>
-                                  </td>
-                                  <td style="border-bottom-color:rgb(245, 243, 243);">
-                                    <mat-radio-group formControlName="legallyauthorized">
-                                      <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                      <mat-radio-button value="No">No</mat-radio-button>
-                                    </mat-radio-group>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td style="border-bottom-color:rgb(245, 243, 243);">
-                                    <h6>Do you or will you require sponsorship for a US employment visa</h6>
-                                  </td>
-                                  <td style="border-bottom-color:rgb(245, 243, 243);">
-                                    <mat-radio-group formControlName="requiresponsorship">
-                                      <mat-radio-button value="Yes">Yes</mat-radio-button>
-                                      <mat-radio-button value="No">No</mat-radio-button>
-                                    </mat-radio-group>
-                                  </td>
-                                </tr>
-                            </table>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
-                            
-                          </td>                         
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);"></td>
-                          <td style="border-bottom-color:rgb(245, 243, 243);"></td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);"></td>
-                          <td style="border-bottom-color:rgb(245, 243, 243);"></td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </mat-tab>
-              <mat-tab label="Social">
-                <div class="example-large-box mat-elevation-z4">
-                  <div class="columns">
-                    <div class="column is-11">
-                      <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput placeholder="LinkedIn url" type="url" formControlName="linkedinurl">
-                              <span matPrefix>http://&nbsp;</span>
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput placeholder="Website url" formControlName="websiteurl">
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput placeholder="Twitter url" formControlName="twitterurl">
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom-color:rgb(245, 243, 243);">
-                            <mat-form-field>
-                              <input matInput placeholder="Github url" formControlName="githuburl">
-                            </mat-form-field>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </mat-tab>
-            </mat-tab-group>
-
-
-            <div class="columns">
-              <div class="column is-12">&nbsp;</div>
-            </div>
-            <div class="columns">
-              <div class="column is-12">
-                <h5>Skills</h5>
-              </div>
-            </div>
-
-            <div class="columns">
-              <div class="column is-12">
+  <div class="columns">
+    <div class="column is-12">
+      <div class="columns">
+        <div class="column is-10 is-offset-1">
+          <span class="font-family: 'Raleway', sans-serif;">Resume</span>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-10 is-offset-1">
+          <mat-tab-group dynamicHeight>
+            <mat-tab label="Basics">
+              <div class="example-large-box mat-elevation-z4">
                 <div class="columns">
                   <div class="column is-11">
                     <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
                       <tr>
-                        <td>
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
                           <mat-form-field>
-                            <mat-select [(value)]="selected"  placeholder="Select Skill">
-                              <mat-option value="Python">Python</mat-option>
-                              <mat-option value=".Net">.NET</mat-option>
-                              <mat-option value="Django">Django</mat-option>
-                            </mat-select>
+                            <input matInput placeholder="Candidate Name" formControlName="name">
                           </mat-form-field>
                         </td>
-                        <td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
                           <mat-form-field>
-                            <input matInput placeholder="">
-                          </mat-form-field>
-                        </td>
-                        
-                      </tr>
-                      <tr>
-                        <td colspan="2">
-                            <button mat-raised-button>+ Add skill</button>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div>
-                      <br>
-                      <button mat-fab color="primary">
-                        <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
-                      </button>
-                      
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="columns">
-              <div class="column is-12">&nbsp;</div>
-            </div>
-            <div class="columns">
-              <div class="column is-12">
-                <h5>Experience</h5>
-                <button mat-button (click)="openSnackBar('message.value', 'action.value')">Show snack-bar</button>
-                <button mat-button (click)="openDialog()">Open dialog</button>
-              </div>
-            </div>
-
-
-
-            <div class="columns">
-              <div class="column is-12">
-                <div class="columns">
-                  <div class="column is-11">
-                    <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
-                      <tr>
-                        <td>
-                          <mat-form-field>
-                            <mat-select [(value)]="selected">
-                              <mat-option value="Project">Add Project</mat-option>
-                              <mat-option value="Title">Add Title</mat-option>
-                              <mat-option value="Company Name">Add Company Name</mat-option>
-                            </mat-select>
-                          </mat-form-field>
-                        </td>
-                        <td>
-                          <mat-form-field>
-                            <input matInput placeholder="">
-                          </mat-form-field>
-                        </td>
-                        <td>
-                          <button mat-raised-button matTooltip="Info about the action" (click)="addExperience()">Add</button>
-
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div>
-                      <br>
-                      <button mat-fab color="primary">
-                        <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
-                      </button>
-                      
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="columns" formArrayName="experiences">
-              <div class="column is-12">
-                <div class="columns" *ngFor="let exp of experienceForms.controls; let i=index" [formGroupName]="i">
-                  <div class="column is-11">
-                    <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
-                      <tr>
-                        <td style="border:0px;" colspan="2">
-                          {{i+1}}
-                          <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Project" formControlName="project">
-                          </mat-form-field>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="border:0px;" colspan="2">
-                          <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Title" formControlName="title">
-                          </mat-form-field>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="border:0px;">
-                          <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Company" formControlName="company">
-                          </mat-form-field>
-                        </td>
-                        <td style="border:0px;">
-                          <mat-form-field class="example-full-width">
                             <input matInput placeholder="Location" formControlName="location">
                           </mat-form-field>
                         </td>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <input matInput placeholder="email" formControlName="email">
+                          </mat-form-field>
+                        </td>
                       </tr>
                       <tr>
-                        <td style="border:0px;">
-                          <mat-form-field class="example-full-width">
-                            <input matInput placeholder="fromdate" formControlName="fromdate">
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <!-- <textarea matInput placeholder="Mini Resume" formControlName="miniresume"></textarea> -->
+                            <textarea matInput #message maxlength="256" placeholder="Mini Resume" formControlName="miniresume"></textarea>
+                            <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+                            <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                           </mat-form-field>
-                          <mat-form-field class="example-full-width">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <input matInput placeholder="Role" formControlName="role">
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <textarea matInput placeholder="your message..." formControlName="message"></textarea>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Talent Profile">
+              <div class="example-large-box mat-elevation-z4">
+                <div class="columns">
+                  <div class="column is-11">
+                    <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
+                      <tr>
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <label class="label">Search status</label>
+                        </td>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <mat-select placeholder="Job Search Status" [(value)]="selected" formControlName="jobsearchstatus">
+                              <mat-option value="Actively Interviewing">Actively Interviewing</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <label class="label">Job Type</label>
+                        </td>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <mat-select placeholder="Job Type" multiple formControlName="jobtype">
+                              <mat-option *ngFor="let job of typesOfJobs" [value]="job">{{job}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <label class="label">Annual Salary</label>
+                        </td>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <input matInput formControlName="desiredannualsalary" placeholder="Desired Annual Salary"
+                              type="number" class="example-right-align">
+                            <span matPrefix>$&nbsp;</span>
+                            <span matSuffix>.00</span>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <input matInput placeholder="Desired Location" type="text" formControlName="desiredlocation">
+                          </mat-form-field>
+                        </td>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-checkbox formControlName="opentoworkremotely">Open to work remotely</mat-checkbox>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
+                          <label class="label">Work Authorization</label>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
+                          <table>
+                            <tr>
+                              <td style="border-bottom-color:rgb(245, 243, 243);">
+                                <h6>Are you legally authorized to work in the United States</h6>
+                              </td>
+                              <td style="border-bottom-color:rgb(245, 243, 243);">
+                                <mat-radio-group formControlName="legallyauthorized">
+                                  <mat-radio-button value="Yes">Yes</mat-radio-button>
+                                  <mat-radio-button value="No">No</mat-radio-button>
+                                </mat-radio-group>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="border-bottom-color:rgb(245, 243, 243);">
+                                <h6>Do you or will you require sponsorship for a US employment visa</h6>
+                              </td>
+                              <td style="border-bottom-color:rgb(245, 243, 243);">
+                                <mat-radio-group formControlName="requiresponsorship">
+                                  <mat-radio-button value="Yes">Yes</mat-radio-button>
+                                  <mat-radio-button value="No">No</mat-radio-button>
+                                </mat-radio-group>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);"></td>
+                        <td style="border-bottom-color:rgb(245, 243, 243);"></td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);"></td>
+                        <td style="border-bottom-color:rgb(245, 243, 243);"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Social">
+              <div class="example-large-box mat-elevation-z4">
+                <div class="columns">
+                  <div class="column is-11">
+                    <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <input matInput placeholder="LinkedIn url" type="url" formControlName="linkedinurl">
+                            <span matPrefix>http://&nbsp;</span>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <input matInput placeholder="Website url" formControlName="websiteurl">
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <input matInput placeholder="Twitter url" formControlName="twitterurl">
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="border-bottom-color:rgb(245, 243, 243);">
+                          <mat-form-field>
+                            <input matInput placeholder="Github url" formControlName="githuburl">
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+
+
+          <div class="columns">
+            <div class="column is-12">&nbsp;</div>
+          </div>
+          <div class="columns">
+            <div class="column is-12">
+              <h5>Skills</h5>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-12">
+              
+            </div>
+          </div>
+
+
+          <div class="columns">
+            <div class="column is-12">
+
+              <div class="columns">
+                <div class="column is-11">
+                  <table class="table is-fullwidth" formArrayName="skills" style="background-color:rgb(245, 243, 243)">
+                    <tr *ngIf="skillForms.controls == null"><td><h3>No skills added</h3></td></tr>
+                    <tr *ngFor="let skill of skillForms.controls; let i=index" [formGroupName]="i">
+                        <!-- <td style="border:0px;">
+                            {{i+1}}</td> -->
+                      <td style="border:0px;">
+                        <mat-form-field>
+                          <mat-select placeholder="Choose skill" formControlName="skillname">
+                            <mat-option value=".NET">.NET</mat-option>
+                            <mat-option value="Python">Python</mat-option>
+                            <mat-option value="Java">Java</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <!-- <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Skill Name" formControlName="skillname">
+                        </mat-form-field> -->
+                      </td>
+                      <td style="border:0px;">
+                        <mat-form-field>
+                            <mat-select placeholder="Choose skill level" formControlName="skilllevel">
+                              <mat-option value="Expert">Expert</mat-option>
+                              <mat-option value="Intermediate">Intermediate</mat-option>
+                              <mat-option value="Beginner">Beginner</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                      </td>
+                      <td style="border:0px;">&nbsp;
+                        <button mat-button color="warn" (click)="deleteSkill(i)">
+                          <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon> Delete
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                          <button mat-button (click)="addSkill()">
+                              <mat-icon aria-label="Add skill">add_circle</mat-icon> Add skill</button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div>
+                  &nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column is-12">
+              <div class="columns">
+                <div class="column is-11">
+                  
+                  <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
+                    <tr>
+                        <td style="border:0px;">Add</td>
+                      <td>
+                        <mat-form-field>
+                          <mat-select [(value)]="selected" placeholder="Choose skill">
+                            
+                            <mat-option *ngFor="let sk of skillList" [value]="sk">
+                                {{sk}}
+                              </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+                      <td>
+                        <mat-form-field>
+                            <mat-select [(value)]="selected" placeholder="Choose skill level">
+                                <mat-option value="Beginner">Beginner</mat-option>
+                                <mat-option value="Medium">Medium</mat-option>
+                                <mat-option value="Expert">Expert</mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                      </td>
+                      <td>
+                          <button mat-button (click)="addSkill()">
+                              <mat-icon aria-label="Add skill">add_circle</mat-icon> Save skill</button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div>
+                  <!-- <br>
+                  <button mat-fab color="primary" (click)="addSkill()">
+                    <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
+                  </button> -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="columns">
+            <div class="column is-12">&nbsp;</div>
+          </div>
+          <div class="columns">
+            <div class="column is-12">
+              <h5>Experience</h5>
+              <button mat-button (click)="openSnackBar('message.value', 'action.value')">Show snack-bar</button>
+              <button mat-button (click)="openDialog()">Open dialog</button>
+            </div>
+          </div>
+
+
+
+          <div class="columns">
+            <div class="column is-12">
+              <div class="columns">
+                <div class="column is-11">
+                  <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
+                    <tr>
+                      <td>
+                        <mat-form-field>
+                          <mat-select [(value)]="selected">
+                            <mat-option value="Project">Add Project</mat-option>
+                            <mat-option value="Title">Add Title</mat-option>
+                            <mat-option value="Company Name">Add Company Name</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+                      <td>
+                        <mat-form-field>
+                          <input matInput placeholder="">
+                        </mat-form-field>
+                      </td>
+                      <td>
+                        <button mat-raised-button matTooltip="Info about the action" (click)="addExperience()">Add</button>
+
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div>
+                  <br>
+                  <button mat-fab color="primary">
+                    <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns" formArrayName="experiences">
+            <div class="column is-12">
+              <div class="columns" *ngFor="let exp of experienceForms.controls; let i=index" [formGroupName]="i">
+                <div class="column is-11">
+                  <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
+                    <tr>
+                      <td style="border:0px;" colspan="2">
+                        {{i+1}}
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Project" formControlName="project">
+                        </mat-form-field>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="border:0px;" colspan="2">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Title" formControlName="title">
+                        </mat-form-field>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="border:0px;">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Company" formControlName="company">
+                        </mat-form-field>
+                      </td>
+                      <td style="border:0px;">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Location" formControlName="location">
+                        </mat-form-field>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="border:0px;">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="fromdate" formControlName="fromdate">
+                        </mat-form-field>
+                        <!-- <mat-form-field class="example-full-width">
                             <input matInput [matDatepicker]="picker" formControlName="fromdate" placeholder="Choose a date">
                             <mat-datepicker-toggle matSuffix [for]="picker">
                               <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                             </mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
-                          </mat-form-field>
+                          </mat-form-field> -->
 
 
-                        </td>
-                        <td style="border:0px;">
-                        </td>
-                      <tr>
-                        <td style="border:0px;" colspan="2">
-                          <mat-form-field>
-                            <textarea matInput placeholder="Project description" formControlName="projectdescription"></textarea>
-                          </mat-form-field>
-                        </td>
-                      </tr>
+                      </td>
+                      <td style="border:0px;">
+                      </td>
+                    <tr>
+                      <td style="border:0px;" colspan="2">
+                        <mat-form-field>
+                          <textarea matInput placeholder="Project description" formControlName="projectdescription"></textarea>
+                        </mat-form-field>
+                      </td>
+                    </tr>
 
-                    </table>
-                  </div>
-                  <div>
-                    <button mat-fab color="warn" (click)="deleteExperience(i)">
-                      <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
-                    </button>
-                    <br><br>
-                    <button mat-fab color="primary" (click)="openDialog()">
-                      <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-                    </button>
+                  </table>
+                </div>
+                <div>
+                  <button mat-fab color="warn" (click)="deleteExperience(i)">
+                    <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                  </button>
+                  <br><br>
+                  <button mat-fab color="primary" (click)="openDialog()">
+                    <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                  </button>
 
-                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="columns">
-                <div class="column is-12">
-                  <button mat-button mat-raised-button color="primary" type="button" (click)="savedata()" [disabled]="myForm.invalid">Submit
-                    Form</button>
-                </div>
-              </div>
+          <div class="columns">
+            <div class="column is-12">
+              <button mat-button mat-raised-button color="primary" type="button" (click)="savedata()" [disabled]="myForm.invalid">Submit
+                Form</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
 
 
 
-    <!-- <h5>Phone numbers</h5>
+  <!-- <h5>Phone numbers</h5>
     <table formArrayName="phones" class="example-full-width" cellspacing="0">
       <tr *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i">
         <td style="border:0px;">

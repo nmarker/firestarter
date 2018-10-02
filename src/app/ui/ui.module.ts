@@ -20,13 +20,15 @@ import { MatButtonModule, MatCheckboxModule, MatMenuModule, MatInputModule, MatS
   MatCardModule, MatTabsModule, MatIconModule, MatPaginatorModule, MatFormFieldModule, MatRadioModule, MatIcon, MatListOption,
  MatSortModule, MatTableModule, MatGridListModule, MatInput, MatSelectModule, MatDialog, MatDatepickerModule, MatListModule } from '@angular/material';
 import { FireFormDirective } from './fire-form.directive';
+import { ProfileResumeFormDirective } from './profile-resume-form.directive';
 import { AddresumeComponent } from './addresume/addresume.component';
 import { ViewresumeComponent } from './viewresume/viewresume.component';
 import { ResumelistComponent } from './resumelist/resumelist.component';
 import { AdListingComponent } from './ad-listing/ad-listing.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DialogOverviewExampleDialog} from './profile/profile.component';
-import { DialogContentExampleDialog } from './profile/profile.component';
+import { DialogContentExampleDialog } from './profileresume/profileresume.component';
+import { ProfileresumeComponent } from './profileresume/profileresume.component';
 
 
 @NgModule({
@@ -53,13 +55,15 @@ import { DialogContentExampleDialog } from './profile/profile.component';
     SsrPageComponent,
     PostjobComponent,
     FireFormDirective,
+    ProfileResumeFormDirective,
     AddresumeComponent,
     ViewresumeComponent,
     ResumelistComponent,
     AdListingComponent,
     ProfileComponent,
     DialogOverviewExampleDialog,
-    DialogContentExampleDialog
+    DialogContentExampleDialog,
+    ProfileresumeComponent
   ],
   exports: [
     MainNavComponent,

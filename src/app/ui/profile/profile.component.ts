@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { tap, first } from 'rxjs/operators';
+import { tap, first, take } from 'rxjs/operators';
 import {
   MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBarConfig,
   MatSnackBarHorizontalPosition,
@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
   toppings = new FormControl();
   toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
+  skillList: string[]= ['.NET', 'Python', 'Django'];
   myForm: FormGroup;
 
   // Form state
@@ -75,7 +76,8 @@ export class ProfileComponent implements OnInit {
       websiteurl: [''],
       twitterurl: [''],
       githuburl: [''],
-      phones: this.fb.array([]),
+      skills: this.fb.array([]),
+      //phones: this.fb.array([]),
       experiences: this.fb.array([])
     })
     
@@ -116,7 +118,7 @@ export class ProfileComponent implements OnInit {
     config.verticalPosition = this.verticalPosition;
     config.horizontalPosition = this.horizontalPosition;
     config.duration = this.setAutoHide ? this.autoHide : 0;
-    this.snackBar.open('this.message this.message this.message this.message this.message this.message', this.action ? this.actionButtonLabel : undefined, config);
+    this.snackBar.open(message, this.action ? this.actionButtonLabel : undefined, config);
 
   }
 
@@ -128,18 +130,50 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+  }
+
+  get skillForms() {
+    //console.log(this.myForm.get('experiences').toString)
+    return this.myForm.get('skills') as FormArray
+  }
+
   get experienceForms() {
+    //console.log(this.myForm.get('experiences').toString)
     return this.myForm.get('experiences') as FormArray
   }
 
-  get phoneForms() {
-    return this.myForm.get('phones') as FormArray
+  // get phoneForms() {
+    
+  //   return this.myForm.get('phones') as FormArray
+  // }
+
+  addSkill() {
+    console.log('in add skill')
+    try{
+      const skill = this.fb.group({
+        skillname: [],
+        skilllevel: []
+      })
+  
+      this.skillForms.push(skill);
+    }
+    catch (err) {
+      console.error(err)
+    }
+   
   }
 
   addExperience() {
 
     const experience = this.fb.group({
       project: [],
+      title: [],
       company: [],
       location: [],
       fromdate: [],
@@ -149,38 +183,45 @@ export class ProfileComponent implements OnInit {
     this.experienceForms.push(experience);
   }
 
-  addPhone() {
+  // addPhone() {
 
-    const phone = this.fb.group({
-      area: [],
-      prefix: [],
-      line: [],
-    })
+  //   const phone = this.fb.group({
+  //     area: [],
+  //     prefix: [],
+  //     line: [],
+  //   })
 
-    this.phoneForms.push(phone);
-  }
+  //   this.phoneForms.push(phone);
+  // }
 
-  deletePhone(i) {
-    this.phoneForms.removeAt(i)
-  }
+  // deletePhone(i) {
+  //   this.phoneForms.removeAt(i)
+  // }
 
   deleteExperience(i) {
     this.experienceForms.removeAt(i)
   }
-  savedata() {
+  
+  deleteSkill(i) {
+    //console.log('deleteStill @ ')
+    this.skillForms.removeAt(i)
+  }
+
+  async savedata() {
     const formValue = this.myForm.value;
 
     try {
       //this.afs.doc('contacts/x7rtxWnvtg5062p9ZXo5').update(formValue)
+      
       if (this.isAdding){
-        this.afs.doc('contacts/' + this.resumename).set(formValue)
+        await this.afs.doc('contacts/' + this.resumename).set(formValue, {merge:true})
       }
       else
       {
-        this.afs.doc('contacts/' + this.resumename).update(formValue)
+        await this.afs.doc('contacts/' + this.resumename).update(formValue)
       }
       
-
+      this.openSnackBar('saved','')
       this.success = true;
     } catch (err) {
       console.error(err)
@@ -188,6 +229,7 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  
   // async submitHandler() {
   //   this.loading = true;
 
@@ -238,19 +280,33 @@ export class ProfileComponent implements OnInit {
           //  line: ['7890'],
           //})
           //console.log(data['phones'][0]['area'])
-          if (data['phones']) {
-            data['phones'].forEach(item => {
-              console.log(item['area'] + ':' + item['line'] + ':' + item['prefix'])
-              const phone = this.fb.group({
-                area: [item['area']],
-                prefix: [item['line']],
-                line: [item['prefix']],
+
+          if (data['skills']) {
+            console.log('skills : ' + JSON.stringify(data['skills']))
+            data['skills'].forEach(item => {
+              const skill = this.fb.group({
+                skillname: [item['skillname']],
+                skilllevel: [item['skilllevel']]
               })
-              this.phoneForms.push(phone);
+              this.skillForms.push(skill);
             })
           }
 
+
+          // if (data['phones']) {
+          //   data['phones'].forEach(item => {
+          //     console.log(item['area'] + ':' + item['line'] + ':' + item['prefix'])
+          //     const phone = this.fb.group({
+          //       area: [item['area']],
+          //       prefix: [item['line']],
+          //       line: [item['prefix']],
+          //     })
+          //     this.phoneForms.push(phone);
+          //   })
+          // }
+
           if (data['experiences']) {
+            console.log('experiences : ' + JSON.stringify(data['experiences']))
             data['experiences'].forEach(item => {
               const experience = this.fb.group({
 
@@ -266,14 +322,17 @@ export class ProfileComponent implements OnInit {
               this.experienceForms.push(experience);
             })
           }
-
+          else{
+            console.log('no experience found')
+          }
           //this.phoneForms.push(phone);
           this.isAdding = false;
         }
         else{
           this.isAdding = true;
         }
-      })
+      }),
+      take(1)
     )
       .subscribe()
   }

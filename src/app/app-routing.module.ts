@@ -13,7 +13,8 @@ import { AddresumeComponent } from './ui/addresume/addresume.component';
 import { ViewresumeComponent } from './ui/viewresume/viewresume.component';
 import { ResumelistComponent } from './ui/resumelist/resumelist.component';
 import { AdListingComponent } from './ui/ad-listing/ad-listing.component';
-import {ProfileComponent } from './ui/profile/profile.component';
+import { ProfileComponent } from './ui/profile/profile.component';
+import { ProfileresumeComponent } from './ui/profileresume/profileresume.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'resumelist', component: ResumelistComponent },
   { path: 'adlisting', component: AdListingComponent },
   { path: 'ssr', component: SsrPageComponent },
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent},
+  { path: 'profileresume', component: ProfileresumeComponent}
 ];
 
 @NgModule({
