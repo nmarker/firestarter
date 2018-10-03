@@ -46,7 +46,6 @@ export class ProfileResumeFormDirective implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.docRef = this.getDocRef(this.path);
-    //this.preloadData();
     this.autoSave();
   }
 

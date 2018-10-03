@@ -47,6 +47,10 @@ export class ProfileresumeComponent implements OnInit {
     //this.resumename = this.revisedRandId();
   }
   
+  getFirestoreId(){
+    return this.afs.createId();
+  }
+
   revisedRandId() {
     return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
   }
@@ -60,7 +64,7 @@ export class ProfileresumeComponent implements OnInit {
 
     if (this.resumename == undefined)
     {
-      this.resumename = this.revisedRandId();
+      this.resumename = this.getFirestoreId();
       this.navigateToFoo();
     }
 
@@ -138,9 +142,9 @@ export class ProfileresumeComponent implements OnInit {
                 project: [item['project']],
                 title: [item['title']],
                 company: [item['company']],
-                //fromdate: [new FormControl(new Date(item['fromdate']*1000))],
-                fromdate: new FormControl((new Date()).toISOString()),
-                //fromdate: new FormControl((new Date(Date.parse(item['fromdate']))).toISOString()),
+                fromdate: [new Date(this.toDateTime(item['fromdate']['seconds']))],
+                todate: [new Date(this.toDateTime(item['todate']['seconds']))],
+                currentlyemployed: [item['currentlyemployed']],
                 location: [item['location']],
                 projectdescription: [item['projectdescription']]
               })
@@ -159,6 +163,15 @@ export class ProfileresumeComponent implements OnInit {
       take(1)
     )
       .subscribe()
+  }
+
+  toDateTime(utcSeconds) {
+    var returndate=""
+    if(utcSeconds != null){
+      var myDate = new Date( utcSeconds *1000);
+      returndate = myDate.toLocaleString()
+    }
+    return returndate;
   }
 
   navigateToFoo(){
@@ -256,23 +269,36 @@ export class ProfileresumeComponent implements OnInit {
    
   }
 
-  addExperience(input : HTMLInputElement) {
+  addExperience(input : HTMLInputElement, outText: HTMLLabelElement) {
     console.log('####' + input.value)
-    const experience = this.fb.group({
-      project: [input.value],
-      title: [],
-      company: [],
-      location: [],
-      fromdate: [],
-      projectdescription: []
-    })
+    //console.log('@@@' + addType.selectedIndex)
+    if (input.value.trim() != '')
+    {
+      const experience = this.fb.group({
+        project: [input.value],
+        title: [],
+        company: [],
+        location: [],
+        fromdate: [],
+        todate: [],
+        currentlyemployed: [],
+        projectdescription: []
+      })
 
-    this.experienceForms.push(experience);
+      this.experienceForms.push(experience);
+    }
+    else
+    {
+
+      //console.log('Project name required!!')
+      outText.textContent='Project name required!!'
+    }
   }
 
   deleteExperience(i) {
     console.log('in deleteExperience: ' + i)
     this.experienceForms.removeAt(i)
+    this.openSnackBar('Experience deleted.','Succes')
   }
   
   deleteSkill(i) {
