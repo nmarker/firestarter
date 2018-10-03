@@ -142,8 +142,8 @@ export class ProfileresumeComponent implements OnInit {
                 project: [item['project']],
                 title: [item['title']],
                 company: [item['company']],
-                fromdate: [new Date(this.toDateTime(item['fromdate']['seconds']))],
-                todate: [new Date(this.toDateTime(item['todate']['seconds']))],
+                fromdate: [new Date(this.toDateTime(item['fromdate'] ? item['fromdate']['seconds'] : ''))],
+                todate: [new Date(this.toDateTime(item['todate'] ? item['todate']['seconds'] : ''))],
                 currentlyemployed: [item['currentlyemployed']],
                 location: [item['location']],
                 projectdescription: [item['projectdescription']]
