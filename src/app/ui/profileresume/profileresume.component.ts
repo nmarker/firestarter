@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl  } from '@angular/forms'
 import { AngularFirestore } from 'angularfire2/firestore'
 import { BehaviorSubject } from 'rxjs'
@@ -7,7 +7,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import {
   MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBarConfig,
   MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition
+  MatSnackBarVerticalPosition, MatTooltipModule
 } from '@angular/material';
 
 
@@ -40,11 +40,28 @@ export class ProfileresumeComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'left';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   selected:string = 'Project';
+
+  public title = 'Places';
+  public addrKeys: string[];
+  public addr: object;
+  
   constructor(private fb: FormBuilder, private afs: AngularFirestore, 
               public snackBar: MatSnackBar, public dialog: MatDialog,
                 private activatedRoute: ActivatedRoute,
-              private router: Router) { 
+              private router: Router, private zone: NgZone) { 
     //this.resumename = this.revisedRandId();
+
+  }
+  
+  //Method to be invoked everytime we receive a new instance 
+  //of the address object from the onSelect event emitter.
+  setAddress(addrObj) {
+    //We are wrapping this in a NgZone to reflect the changes
+    //to the object in the DOM.
+    this.zone.run(() => {
+      this.addr = addrObj;
+      this.addrKeys = Object.keys(addrObj);
+    });
   }
   
   getFirestoreId(){
@@ -87,8 +104,10 @@ export class ProfileresumeComponent implements OnInit {
       twitterurl: [''],
       githuburl: [''],
       skills: this.fb.array([]),
+      additionalskills: [''],
       //phones: this.fb.array([]),
-      experiences: this.fb.array([])
+      experiences: this.fb.array([]),
+      educationalqualifications: this.fb.array([])
     })
     //this.myDoc = this.afs.doc('contacts/test2').valueChanges();
     this.myDoc = this.afs.doc('resume/' + this.resumename).valueChanges();
@@ -125,14 +144,26 @@ export class ProfileresumeComponent implements OnInit {
 
           if (data['skills']) {
             console.log('skills : ' + JSON.stringify(data['skills']))
+            //console.log('skills empty check : ' + Object.keys(data['skills']).length)
+
             data['skills'].forEach(item => {
               const skill = this.fb.group({
                 skillname: [item['skillname']],
                 skilllevel: [item['skilllevel']]
               })
               this.skillForms.push(skill);
+              
             })
           }
+          else
+          {
+            console.log('no skills')
+            //there are no skills available in DB add three skills as default
+            
+          }
+
+          this.myForm.controls['additionalskills'].setValue(data['additionalskills'])
+          
 
           if (data['experiences']) {
             console.log('experiences : ' + JSON.stringify(data['experiences']))
@@ -154,10 +185,41 @@ export class ProfileresumeComponent implements OnInit {
           else{
             console.log('no experience found')
           }
+
+
+          
+
+          if (data['educationalqualifications']) {
+            console.log('educationalqualifications : ' + JSON.stringify(data['educationalqualifications']))
+            data['educationalqualifications'].forEach(item => {
+              const education = this.fb.group({
+
+                collegeuniversityname: [item['collegeuniversityname']],
+                dateofcompletion:  [new Date(this.toDateTime(item['dateofcompletion'] ? item['dateofcompletion']['seconds'] : ''))],
+                degreetype: [item['degreetype']],
+                majorfieldofstudy: [item['majorfieldofstudy']],
+                
+              })
+              this.educationalqualificationsForms.push(education);
+            })
+          }
+          else{
+            console.log('no educationalqualifications found')
+          }
+
           //this.isAdding = false;
         }
-        else{
+        else
+        {
           //this.isAdding = true;
+          var i;
+            for (i = 0; i < 2; i++) {
+              const skill = this.fb.group({
+                skillname: '',
+                skilllevel: ''
+              })
+              this.skillForms.push(skill);
+            }
         }
       }),
       take(1)
@@ -232,6 +294,7 @@ export class ProfileresumeComponent implements OnInit {
             this.deleteExperience(todelete)
             break;
           case "education":
+            this.deleteEducation(todelete)
             break;
         }
       }
@@ -239,13 +302,15 @@ export class ProfileresumeComponent implements OnInit {
   }
 
   get skillForms() {
-    //console.log(this.myForm.get('experiences').toString)
     return this.myForm.get('skills') as FormArray
   }
 
   get experienceForms() {
-    //console.log(this.myForm.get('experiences').toString)
     return this.myForm.get('experiences') as FormArray
+  }
+
+  get educationalqualificationsForms() {
+    return this.myForm.get('educationalqualifications') as FormArray
   }
 
   changeHandler(e) {
@@ -269,9 +334,23 @@ export class ProfileresumeComponent implements OnInit {
    
   }
 
-  addExperience(input : HTMLInputElement, outText: HTMLLabelElement) {
+  saveSkill(skillName: HTMLInputElement, skilloutText: HTMLLabelElement) {
+    console.log("skillName.value : " + skillName.value);
+
+    if (skillName.value.trim() != '')
+    {
+      const skill = this.fb.group({
+        skillname: [skillName.value],
+        skilllevel: ['']  
+      })
+
+      this.skillForms.push(skill);
+    }
+  }
+
+  addExperience(addtypevalue: HTMLInputElement, input : HTMLInputElement, outText: HTMLLabelElement) {
     console.log('####' + input.value)
-    //console.log('@@@' + addType.selectedIndex)
+    console.log('@@@' + addtypevalue.value)
     if (input.value.trim() != '')
     {
       const experience = this.fb.group({
@@ -291,9 +370,31 @@ export class ProfileresumeComponent implements OnInit {
     {
 
       //console.log('Project name required!!')
-      outText.textContent='Project name required!!'
+      //outText.textContent='Project name required!!'
     }
   }
+
+  addSchool(SchoolName : HTMLInputElement, SchoolNameError: HTMLLabelElement) {
+
+    if (SchoolName.value.trim() != '')
+    {
+      const school = this.fb.group({
+        collegeuniversityname: [SchoolName.value],
+        dateofcompletion: [],
+        degreetype: [],
+        majorfieldofstudy: []
+      })
+
+      this.educationalqualificationsForms.push(school);
+    }
+    else
+    {
+
+      //console.log('Project name required!!')
+      //outText.textContent='Project name required!!'
+    }
+  }
+
 
   deleteExperience(i) {
     console.log('in deleteExperience: ' + i)
@@ -304,6 +405,11 @@ export class ProfileresumeComponent implements OnInit {
   deleteSkill(i) {
     //console.log('deleteStill @ ')
     this.skillForms.removeAt(i)
+  }
+
+  deleteEducation(i) {
+    this.educationalqualificationsForms.removeAt(i)
+    this.openSnackBar('School deleted.','Succes')
   }
 
 }

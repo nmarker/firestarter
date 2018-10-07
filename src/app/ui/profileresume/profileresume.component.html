@@ -44,15 +44,33 @@
                                             <tr>
                                                 <td colspan="2" style="border-bottom-color:rgb(245, 243, 243);">
                                                     <mat-form-field>
+                                                        <mat-label>Candidate Name</mat-label>
                                                         <input matInput placeholder="Candidate Name" formControlName="name">
+                                                        <mat-hint>Candidate Name</mat-hint>
                                                     </mat-form-field>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="border-bottom-color:rgb(245, 243, 243);">
+                                                    
                                                     <mat-form-field>
-                                                        <input matInput placeholder="Location" formControlName="location">
+                                                        <mat-label>Location</mat-label>
+                                                        <input 
+                                                            matInput
+                                                            formControlName="location"
+                                                            type="text"
+                                                            class="google-place-input"
+                                                            google-place
+                                                            (onSelect)="setAddress($event)"
+                                                            placeholder="Type to search..">
+                                                        <mat-hint>Candidate Name</mat-hint>
                                                     </mat-form-field>
+                                                    <!-- Displaying the contents of the address object received from our event emitter -->
+                                                    <ul style="list-style-type: none;">
+                                                        <li *ngFor="let key of addrKeys">
+                                                        <span style="font-weight: bold">{{key}}</span>: <span>{{addr[key]}}</span>
+                                                        </li>
+                                                    </ul>
                                                 </td>
                                                 <td style="border-bottom-color:rgb(245, 243, 243);">
                                                     <mat-form-field>
@@ -77,6 +95,7 @@
                                                     <mat-form-field>
                                                         <input matInput placeholder="Role" formControlName="role">
                                                     </mat-form-field>
+
                                                 </td>
                                             </tr>
                                             <tr>
@@ -157,7 +176,7 @@
                                                     </mat-form-field>
                                                     <br>
                                                     <mat-checkbox formControlName="opentoworkremotely">Open to work
-                                                            remotely</mat-checkbox>
+                                                        remotely</mat-checkbox>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -299,16 +318,51 @@
                                                 </mat-form-field>
                                             </td>
                                             <td style="border:0px; width: 5%;">
-                                                <button mat-button color="warn" (click)="deleteSkill(i)">
+                                                <button mat-icon-button color="warn" (click)="deleteSkill(i)">
                                                     <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                                                 </button>
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td colspan="3">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <button mat-button (click)="addSkill()">
+                                                                <mat-icon aria-label="Add skill">add_circle</mat-icon>
+                                                                Add another skill
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <!-- <tr>
+                                                        <td style="width:80%;">
+                                                            <mat-form-field>
+                                                                <input #NewSkill matInput placeholder="Skill name"
+                                                                    required>
+                                                            </mat-form-field>
+                                                            <label #NewSkillError class="mat-error" style="color:red;"></label>
+                                                        </td>
+                                                        <td style="width:20%;">
+                                                            <button mat-button (click)="saveSkill(NewSkill, NewSkillError)">
+                                                                <mat-icon aria-label="Save skill">save</mat-icon> Save
+                                                                skill
+                                                            </button>
+                                                        </td>
+                                                    </tr> -->
+                                                </table>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="table is-fullwidth"  style="background-color:rgb(245, 243, 243)">
+                                        <tr>
                                             <td>
-                                                <button mat-button (click)="addSkill()">
-                                                    <mat-icon aria-label="Add skill">add_circle</mat-icon> Add skill
-                                                </button>
+                                                <mat-form-field>
+                                                    <textarea matInput placeholder="Additional skills" formControlName="additionalskills"></textarea>
+                                                    <mat-hint align="start"><strong>Add skills not in the drop down skill list. Separate with comma.</strong>
+                                                    </mat-hint>
+                                                </mat-form-field>
                                             </td>
                                         </tr>
                                     </table>
@@ -352,11 +406,11 @@
                                             </td>
                                             <td style="width:70%;">
                                                 <mat-form-field>
-                                                    <input #ProjectName matInput placeholder="Project name" required>
-                                                    <mat-error #materrorname></mat-error>
-                                                    
+                                                    <input #ProjectName matInput placeholder="{{AddType.value}}"
+                                                        required>
+                                                    <mat-error>{{message.valid}}</mat-error>
                                                 </mat-form-field>
-                                                <label #tempError style="color:red;"></label>
+                                                <label #tempError class="mat-error" style="color:red;"></label>
                                             </td>
 
                                         </tr>
@@ -364,7 +418,7 @@
                                 </div>
                                 <div>
                                     <br>
-                                    <button mat-fab color="primary" [disabled]="ProjectName.invalid" (click)="addExperience(ProjectName, tempError)">
+                                    <button mat-fab color="primary" [disabled]="ProjectName.invalid" (click)="addExperience(AddType, ProjectName, tempError)">
                                         <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
                                     </button>
 
@@ -410,14 +464,16 @@
                                         <tr>
                                             <td style="border:0px;">
                                                 <mat-form-field>
-                                                    <input matInput [matDatepicker]="picker" formControlName="fromdate" placeholder="From" disabled>
+                                                    <input matInput [matDatepicker]="picker" formControlName="fromdate"
+                                                        placeholder="From" disabled>
                                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                                     <mat-datepicker #picker disabled="false"></mat-datepicker>
                                                 </mat-form-field>
                                             </td>
                                             <td style="border:0px;">
                                                 <mat-form-field>
-                                                    <input matInput [matDatepicker]="dp3" formControlName="todate" placeholder="To" disabled>
+                                                    <input matInput [matDatepicker]="dp3" formControlName="todate"
+                                                        placeholder="To" disabled>
                                                     <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
                                                     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
                                                 </mat-form-field>
@@ -436,12 +492,111 @@
                                     </table>
                                 </div>
                                 <div>
-                                    <button mat-fab color="warn" (click)="openDialog('experience', i)">
+                                    <br>
+                                    <button mat-fab color="warn" (click)="openDialog('experience', i)" matTooltip="Delete experience">
                                         <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                                     </button>
                                     <br><br>
-                                    <button mat-fab color="primary" (click)="openDialog('experience',-1)">
+                                    <!-- <button mat-fab color="primary" (click)="openDialog('experience',-1)">
                                         <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                                    </button> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="columns">
+                        <div class="column is-12">&nbsp;</div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-12">
+                            <h5>Education</h5>
+                        </div>
+                    </div>
+
+
+
+                    <div class="columns">
+                        <div class="column is-12">
+                            <div class="columns">
+                                <div class="column is-11">
+                                    <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
+                                        <tr>
+                                            <td style="width:30%;">
+                                                School Name
+                                            </td>
+                                            <td style="width:70%;">
+                                                <mat-form-field>
+                                                    <input #SchoolName matInput placeholder="School Name" required>
+                                                </mat-form-field>
+                                                <label #SchoolNameError class="mat-error" style="color:red;"></label>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div>
+                                    <br>
+                                    <button mat-fab color="primary" (click)="addSchool(SchoolName, SchoolNameError)">
+                                        <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="columns" formArrayName="educationalqualifications">
+                        <div class="column is-12">
+                            <div class="columns" *ngFor="let school of educationalqualificationsForms.controls; let i=index"
+                                [formGroupName]="i">
+                                <div class="column is-11">
+                                    <table class="table is-fullwidth" style="background-color:rgb(245, 243, 243)">
+                                        <tr>
+                                            <td style="border:0px;" colspan="2">
+                                                {{i+1}}
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="College / University name"
+                                                        formControlName="collegeuniversityname">
+                                                </mat-form-field>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:0px;" colspan="2">
+                                                <mat-form-field>
+                                                    <input matInput [matDatepicker]="dateofcompletionpicker"
+                                                        formControlName="dateofcompletion" placeholder="Date of completion"
+                                                        disabled>
+                                                    <mat-datepicker-toggle matSuffix [for]="dateofcompletionpicker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #dateofcompletionpicker disabled="false"></mat-datepicker>
+                                                </mat-form-field>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:0px;">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Degree Type" formControlName="degreetype">
+                                                </mat-form-field>
+                                            </td>
+                                            <td style="border:0px;">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Major Field of study" formControlName="majorfieldofstudy">
+                                                </mat-form-field>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                                <div>
+                                    <br>
+                                    <button mat-fab color="warn" (click)="openDialog('education', i)" matTooltip="Delete education">
+                                        <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                                     </button>
 
                                 </div>

@@ -18,7 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule, MatMenuModule, MatInputModule, MatSnackBarModule, MatDatepicker,
   MatToolbarModule, MatDialogModule, MatSidenavModule, MatNativeDateModule, MatExpansionModule,
   MatCardModule, MatTabsModule, MatIconModule, MatPaginatorModule, MatFormFieldModule, MatRadioModule, MatIcon, MatListOption,
- MatSortModule, MatTableModule, MatGridListModule, MatInput, MatSelectModule, MatDialog, MatDatepickerModule, MatListModule } from '@angular/material';
+  MatSortModule, MatTableModule, MatGridListModule, MatInput, MatSelectModule, MatDialog, MatDatepickerModule, MatListModule,
+  MatTooltipModule } from '@angular/material';
 import { FireFormDirective } from './fire-form.directive';
 import { ProfileResumeFormDirective } from './profile-resume-form.directive';
 import { AddresumeComponent } from './addresume/addresume.component';
@@ -29,7 +30,15 @@ import { ProfileComponent } from './profile/profile.component';
 import { DialogOverviewExampleDialog} from './profile/profile.component';
 import { DialogContentExampleDialog } from './profileresume/profileresume.component';
 import { ProfileresumeComponent } from './profileresume/profileresume.component';
+import { LocationComponent } from './onboarding/location/location.component';
+import { WelcomeComponent } from './onboarding/welcome/welcome.component';
+import { LookingComponent } from './onboarding/looking/looking.component';
+import { PreferencesComponent } from './onboarding/preferences/preferences.component';
+import { PreviewComponent } from './onboarding/preview/preview.component';
+import { GooglePlacesDirective } from './google-places.directive';
 
+//import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
+//import 'rxjs/Rx';
 
 @NgModule({
   imports: [CommonModule, RouterModule, ReactiveFormsModule,
@@ -43,7 +52,9 @@ import { ProfileresumeComponent } from './profileresume/profileresume.component'
     MatIconModule, MatFormFieldModule, MatDatepickerModule,
     MatTableModule, MatPaginatorModule, MatSortModule, 
     MatPaginatorModule, MatGridListModule, MatSelectModule, MatListModule,
-    MatTabsModule, MatIconModule],
+    MatTabsModule, MatIconModule, MatTooltipModule,
+    //Ng4GeoautocompleteModule.forRoot()
+  ],
   declarations: [
     UserLoginComponent,
     HomePageComponent,
@@ -63,7 +74,13 @@ import { ProfileresumeComponent } from './profileresume/profileresume.component'
     ProfileComponent,
     DialogOverviewExampleDialog,
     DialogContentExampleDialog,
-    ProfileresumeComponent
+    ProfileresumeComponent,
+    LocationComponent,
+    WelcomeComponent,
+    LookingComponent,
+    PreferencesComponent,
+    PreviewComponent,
+    GooglePlacesDirective
   ],
   exports: [
     MainNavComponent,

@@ -41,7 +41,7 @@ export class ResumelistComponent implements AfterViewInit {
     //   this.addOne();  
     // }
      
-    this.afs.collection<any>('hackers').valueChanges().subscribe(data => {
+    this.afs.collection<any>('resume').valueChanges().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
