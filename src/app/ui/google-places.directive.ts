@@ -18,10 +18,14 @@ export class GooglePlacesDirective implements OnInit {
   getFormattedAddress(place) {
     //@params: place - Google Autocomplete place object
     //@returns: location_obj - An address object in human readable format
+    console.log(JSON.stringify(place))
     let location_obj = {};
+    location_obj['response'] = JSON.stringify(place);
     for (let i in place.address_components) {
-      let item = place.address_components[i];
       
+      let item = place.address_components[i];
+      //let geometry = place.geometry;
+      //console.log(geometry)
       location_obj['formatted_address'] = place.formatted_address;
       if(item['types'].indexOf("locality") > -1) {
         location_obj['locality'] = item['long_name']

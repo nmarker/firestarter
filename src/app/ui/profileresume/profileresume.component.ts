@@ -61,9 +61,24 @@ export class ProfileresumeComponent implements OnInit {
     this.zone.run(() => {
       this.addr = addrObj;
       this.addrKeys = Object.keys(addrObj);
+      this.myForm.controls['location'].setValue(addrObj['formatted_address']);
     });
   }
   
+  setexperienceAddress(addrObj, x)
+  {
+    console.log('in setexperienceAddress')
+    console.log(' caller : ' + x.value)
+    this.zone.run(() => {
+      this.addr = addrObj;
+      this.addrKeys = Object.keys(addrObj);
+      //this.myForm.controls['location'].setValue(addrObj['formatted_address'];
+      x.setValue(addrObj['formatted_address']);
+      
+    });
+
+  }
+
   getFirestoreId(){
     return this.afs.createId();
   }

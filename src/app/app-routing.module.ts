@@ -17,6 +17,7 @@ import { ProfileComponent } from './ui/profile/profile.component';
 import { ProfileresumeComponent } from './ui/profileresume/profileresume.component';
 import { WelcomeComponent } from './ui/onboarding/welcome/welcome.component';
 import { LocationComponent } from './ui/onboarding/location/location.component';
+import { LookingComponent } from './ui/onboarding/looking/looking.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'profileresume', component: ProfileresumeComponent},
   { path: 'onboarding/welcome', component:WelcomeComponent},
-  { path: 'onboarding/location', component: LocationComponent}
+  { path: 'onboarding/location', component: LocationComponent},
+  { path: 'onboarding/looking', component: LookingComponent}
 ];
 
 @NgModule({
