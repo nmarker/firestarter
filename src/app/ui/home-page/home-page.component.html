@@ -1,6 +1,90 @@
+<div class="columns" style="min-height:500px;">
+  <div class="column is-10 is-offset-1">
+    <div class="columns is-gapless">
+      <div class="column is-7">
+        <mat-form-field appearance="fill">
+          <mat-label>Fill form field</mat-label>
+          <input matInput placeholder="Placeholder">
+          <mat-icon matSuffix>next_week</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="column is-5">
+        <mat-form-field appearance="fill">
+          <mat-label>
+            <mat-icon matSuffix>place</mat-icon>Location
+          </mat-label>
+          <mat-select [(value)]="selected">
+            <mat-option>None</mat-option>
+            <mat-option value="option1">San Francisco</mat-option>
+            <mat-option value="option2">San Jose</mat-option>
+          </mat-select>
+
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-3">
+        <button class="example-full-width" mat-button>Search</button>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column half">
+
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>CANDIDATES</mat-card-title>
+          </mat-card-header>
+          <mat-card-actions>
+            <button mat-button>View all candidates</button>
+            <button mat-raised-button color="accent" [routerLink]="['/onboarding/welcome']">ADD RESUME</button>
+          </mat-card-actions>
+          <mat-card-content>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+              bred for hunting.
+            </p>
+          </mat-card-content>
+
+        </mat-card>
+
+      </div>
+      <div class="column half">
+
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>JOBS</mat-card-title>
+          </mat-card-header>
+          <mat-card-actions>
+            <button mat-button>View all jobs</button>
+            <button mat-raised-button color="accent">POST JOB</button>
+          </mat-card-actions>
+          <mat-card-content>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+              bred for hunting.
+            </p>
+          </mat-card-content>
+
+        </mat-card>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
 
 <div class="columns">
-    <div class="column is-10 is-offset-1">
+  <div class="column is-10 is-offset-1">
+
+
+
     <h1>#### Welcome to Firestarter</h1>
 
     <a href="https://slackin-pbfjhfxnsa.now.sh"><img src="https://slackin-pbfjhfxnsa.now.sh/badge.svg"></a><br>
@@ -12,15 +96,15 @@
 
     <br>
     <a [routerLink]="['/adlisting']">
-        Ad listing
+      Ad listing
     </a>
     <br>
     <a [routerLink]="['/postjob']">
-        Post Job
-      </a>
+      Post Job
+    </a>
     <br>
     <a [routerLink]="['/addresume']">
-    Add Resume
+      Add Resume
     </a>
     <br>
     <a [routerLink]="['/viewresume']">
@@ -43,16 +127,22 @@
     <br>
     <br>
     <a [routerLink]="['/onboarding/welcome']">on boarding welcome</a>
+    <br>
+    <br>
+    <a [routerLink]="['/searchcandidates']">search candidates</a>
+    <br>
+    <br>
     <p>
-        <i class="fa fa-slack fa-lg"></i> Let's talk on the <a target="blank" href="https://goo.gl/qF8Q5r">
-      Angular Firebase Developers Slack Team
-    </a>
+      <i class="fa fa-slack fa-lg"></i> Let's talk on the <a target="blank" href="https://goo.gl/qF8Q5r">
+        Angular Firebase Developers Slack Team
+      </a>
     </p>
 
     <h2>Free Open Source Screencasts</h2>
 
     <p>
-        <i class="fa fa-youtube fa-lg"></i> Subscribe to the <a href="https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA">AngularFirebase YouTube Channel</a> for weekly lessons.
+      <i class="fa fa-youtube fa-lg"></i> Subscribe to the <a href="https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA">AngularFirebase
+        YouTube Channel</a> for weekly lessons.
     </p>
   </div>
 </div>

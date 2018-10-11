@@ -36,6 +36,7 @@ import { LookingComponent } from './onboarding/looking/looking.component';
 import { PreferencesComponent } from './onboarding/preferences/preferences.component';
 import { PreviewComponent } from './onboarding/preview/preview.component';
 import { GooglePlacesDirective } from './google-places.directive';
+import { SearchcandidatesComponent } from './searchcandidates/searchcandidates.component';
 
 //import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 //import 'rxjs/Rx';
@@ -80,7 +81,8 @@ import { GooglePlacesDirective } from './google-places.directive';
     LookingComponent,
     PreferencesComponent,
     PreviewComponent,
-    GooglePlacesDirective
+    GooglePlacesDirective,
+    SearchcandidatesComponent
   ],
   exports: [
     MainNavComponent,

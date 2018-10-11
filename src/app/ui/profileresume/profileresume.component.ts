@@ -101,6 +101,7 @@ export class ProfileresumeComponent implements OnInit {
     }
 
     this.myForm = this.fb.group({
+      _id: [this.resumename],
       name: ['', Validators.required],
       location: ['', Validators.required],
       miniresume: ['', Validators.required],

@@ -1,0 +1,96 @@
+<div class="columns">
+  <div class="column is-narrow">
+    <div class="" style="width: 150px;">
+      <p class="title is-5">Narrow column</p>
+      <p class="subtitle">This column is only 200px wide.</p>
+      <mat-toolbar color="">
+          <mat-toolbar-row>
+            Custom Toolbar
+          </mat-toolbar-row>
+        
+          <mat-toolbar-row>
+            <span>Second Line</span>
+            <span class="example-spacer"></span>
+            <mat-icon class="example-icon">verified_user</mat-icon>
+          </mat-toolbar-row>
+        
+          <mat-toolbar-row>
+            <span>Third Line</span>
+            <span class="example-spacer"></span>
+            <mat-icon class="example-icon">favorite</mat-icon>
+            <mat-icon class="example-icon">delete</mat-icon>
+          </mat-toolbar-row>
+        </mat-toolbar>
+    </div>
+  </div>
+  <div class="column">
+    <mat-drawer-container class="example-container" autosize>
+      <mat-drawer #drawer class="example-sidenav" mode="over">
+        <button mat-icon-button class="is-pulled-right" (click)="drawer.toggle()">
+          <mat-icon aria-label="Example icon-button with a heart icon">clear</mat-icon>
+        </button>
+          {{todisplayname}}
+          <br>
+          {{todisplayage}}
+          <br>
+          {{todisplayphrase}}
+
+        <p>Auto-resizing sidenav asdf sadf dsf dsf df dsaf sdaf sdaf asdf dsaf sdaf sadfad dsaf sdfd</p>
+        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+          Toggle extra text
+        </button>
+        <button (click)="drawer.toggle()" mat-raised-button>
+            Close
+        </button>
+      </mat-drawer>
+
+      <div class="example-sidenav-content">
+          <button type="button" mat-button (click)="drawer.toggle()">
+              Toggle sidenav ..
+            </button>
+        
+          <p>
+
+              <mat-form-field>
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+  
+                <br>
+  
+                <mat-table #table [dataSource]="dataSource" [trackBy]="trackByUid" matSort class="animate">
+  
+  
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let hacker"> {{ hacker.name }} </mat-cell>
+                  </ng-container>
+  
+  
+                  <ng-container matColumnDef="age">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> age </mat-header-cell>
+                    <mat-cell *matCellDef="let hacker"> {{ hacker.age }} <br> {{ hacker.email }} </mat-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="phrase">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Phrase </mat-header-cell>
+                    <mat-cell *matCellDef="let hacker"> {{ hacker.phrase }} </mat-cell>
+                  </ng-container>
+  
+  
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row); drawer.toggle();"></mat-row>
+  
+                </mat-table>
+  
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[2, 5, 10, 25, 100]">
+                </mat-paginator>
+          </p>
+          
+
+      </div>
+
+    </mat-drawer-container>
+
+  </div>
+</div>
