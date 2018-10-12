@@ -18,8 +18,10 @@ import { ProfileresumeComponent } from './ui/profileresume/profileresume.compone
 import { WelcomeComponent } from './ui/onboarding/welcome/welcome.component';
 import { LocationComponent } from './ui/onboarding/location/location.component';
 import { LookingComponent } from './ui/onboarding/looking/looking.component';
+import { OnboardingprofileComponent } from './ui/onboarding/onboardingprofile/onboardingprofile.component';
 
 import { SearchcandidatesComponent } from './ui/searchcandidates/searchcandidates.component';
+import { PreferencesComponent } from './ui/onboarding/preferences/preferences.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -37,7 +39,9 @@ const routes: Routes = [
   { path: 'onboarding/welcome', component:WelcomeComponent},
   { path: 'onboarding/location', component: LocationComponent},
   { path: 'onboarding/looking', component: LookingComponent},
-  { path: 'searchcandidates', component: SearchcandidatesComponent}
+  { path: 'searchcandidates', component: SearchcandidatesComponent},
+  { path: 'onboarding/profile', component: OnboardingprofileComponent},
+  { path: 'onboarding/preferences', component: PreferencesComponent}
 ];
 
 @NgModule({

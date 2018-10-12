@@ -1,3 +1,68 @@
-<p>
-  preferences works!
-</p>
+<div class="columns">
+    <div class="column is-12">
+      <div class="columns">
+        <div class="column is-10 is-offset-1">
+          <h1 class="head">Find the right opportunities</h1>
+          <h4>Your answers determine which jobs we recommend for you and which companies see your profile.</h4>
+        </div>
+      </div>
+      <div class="columns" style="min-height:500px;">
+        <div class="column is-10 is-offset-1">
+  
+          <div class="columns">
+            <div class="column">
+              <h5>* What types of job are you interested in?</h5>
+              <mat-radio-group class="example-radio-group">
+                <mat-radio-button class="example-radio-button" value="Full-time Employee">Full-time Employee</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Contractor">Contractor</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Intern">Intern</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+  
+          <div class="columns">
+            <div class="column">
+              <h5>* Desired salary?</h5>
+              <mat-form-field>
+                  <input matInput 
+                      placeholder="Desired Annual Salary" type="number" class="example-right-align">
+                  <span matPrefix>$&nbsp;</span>
+                  <span matSuffix>.00</span>
+              </mat-form-field>
+  
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column">
+              <h5>* Are you legally authorized to work in the United States?</h5>
+              <mat-radio-group>
+                  <mat-radio-button value="Yes">Yes</mat-radio-button>
+                  <mat-radio-button value="No">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+  
+          <div class="columns">
+              <div class="column">
+                <h5>* Do you or will you require sponsorship for a US employment visa?</h5>
+                <mat-radio-group>
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+
+          <br><br><br>
+          <div class="columns is-mobile is-centered">
+            <div class="column is-5">
+              <button class="example-full-width" mat-raised-button color="primary">Save and continue</button>
+              <br><br>
+              <a mat-button class="example-full-width" [routerLink]="['/profileresume']">Skip for now <i class="material-icons">arrow_forward_ios</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

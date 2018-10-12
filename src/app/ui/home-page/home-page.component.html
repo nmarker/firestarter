@@ -1,5 +1,8 @@
 <div class="columns" style="min-height:500px;">
   <div class="column is-10 is-offset-1">
+    <div class="columns">
+      <div class="column is-12 freehand">Job search</div>
+    </div>
     <div class="columns is-gapless">
       <div class="column is-7">
         <mat-form-field appearance="fill">
@@ -39,7 +42,7 @@
             <mat-card-title>CANDIDATES</mat-card-title>
           </mat-card-header>
           <mat-card-actions>
-            <button mat-button>View all candidates</button>
+            <button mat-button [routerLink]="['/searchcandidates']">View all candidates</button>
             <button mat-raised-button color="accent" [routerLink]="['/onboarding/welcome']">ADD RESUME</button>
           </mat-card-actions>
           <mat-card-content>
@@ -61,7 +64,7 @@
           </mat-card-header>
           <mat-card-actions>
             <button mat-button>View all jobs</button>
-            <button mat-raised-button color="accent">POST JOB</button>
+            <button mat-raised-button [routerLink]="['/postjob']" color="accent">POST JOB</button>
           </mat-card-actions>
           <mat-card-content>
             <p>

@@ -2,34 +2,33 @@
     <div class="column is-12">
       <div class="columns">
         <div class="column is-10 is-offset-1">
-          <h1 class="head">Are you currently looking for a job?</h1>
+          <h1 class="head">Are you actively looking for a job?</h1>
         </div>
       </div>
-      <div class="columns" style="min-height:500px;">
+      <div class="columns">
         <div class="column is-10 is-offset-1">
-          
-            <div class="columns is-centered">
-              <div class="column">
-                <h5 class="hiremusefont">FOR INDIVIDUALS</h5>
-                <mat-divider></mat-divider>
-                <br>
-                
+            <mat-card>
+              <h5 class="hiremusefont">Apply privately. No middlemen. Build your network and future team.</h5>
+              <mat-divider></mat-divider>
+              <br>
+              <div class="columns is-centered">
+                <div class="column is-5">
+                  <mat-radio-group class="example-radio-group" >
+                    <mat-radio-button class="example-radio-button" value="1">Yes, Actively looking</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="2">No, NOT actively</mat-radio-button>
+                  </mat-radio-group>
+                </div>
               </div>
-            </div>
-            <br><br><br>
-            <div class="columns is-mobile is-centered">
-              <div class="column is-half">
-                <button class="example-full-width" mat-raised-button color="primary">Save and continue</button>
-                <br><br>
-                <a mat-button class="example-full-width" [routerLink]="['/onboarding/location']">Skip for now <i class="material-icons">arrow_forward_ios</i>
-                </a>
+              <div class="columns is-mobile is-centered">
+                <div class="column is-5">
+                  <button class="example-full-width" mat-raised-button color="primary">Save & continue</button>
+                  <br><br>
+                  <a mat-button class="example-full-width" [routerLink]="['/onboarding/profile']">Skip for now >></a>
+                </div>
               </div>
-            </div>
-  
-          
+            </mat-card>
         </div>
-  
       </div>
-    </div>
+      </div>
   
   </div>
