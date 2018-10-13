@@ -38,7 +38,9 @@ export class PostjobComponent implements OnInit {
       contactname: [''],
       companyname: [''],
       contactemail: [''],
-      contactphonenumber: ['']
+      confirmcontactemail: [''],
+      contactphonenumber1: [''],
+      contactphonenumber2:['']
       //contactemail: ['', Validators.required, Validators.email]
       //chosenlocations: this.fb.array([])
       }
@@ -79,7 +81,9 @@ export class PostjobComponent implements OnInit {
           this.myForm.controls['contactname'].setValue(data['contactname']);
           this.myForm.controls['companyname'].setValue(data['companyname']);
           this.myForm.controls['contactemail'].setValue(data['contactemail']);
-          this.myForm.controls['contactphonenumber'].setValue(data['contactphonenumber']);
+          this.myForm.controls['confirmcontactemail'].setValue(data['confirmcontactemail']);
+          this.myForm.controls['contactphonenumber1'].setValue(data['contactphonenumber1']);
+          this.myForm.controls['contactphonenumber2'].setValue(data['contactphonenumber2']);
           //this.myForm.controls[''].setValue(data['']);
 
           // if (data['chosenlocations']){

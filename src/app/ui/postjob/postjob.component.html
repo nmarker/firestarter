@@ -170,17 +170,29 @@
               </div>
             </div>
             <div class="columns">
-              <div class="column is-4">
+              <div class="column is-3">
                 <mat-form-field class="example-full-width">
                   <mat-label>Contact phone number</mat-label>
-                  <input matInput formControlName="contactphonenumber" type="text" placeholder="Phone number">
+                  <input matInput formControlName="contactphonenumber1" type="text" placeholder="Phone number">
                   <mat-hint>Contact phone number</mat-hint>
                 </mat-form-field>
               </div>
-              <div class="column is-4">
+              <div class="column is-3">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Alternate phone number</mat-label>
+                  <input matInput formControlName="contactphonenumber2" type="text" placeholder="Alternate phone number">
+                  <mat-hint>Alternate phone number</mat-hint>
+                </mat-form-field>
+              </div>
+              <div class="column is-3">
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Enter your email" formControlName="contactemail" required>
                   <!-- <mat-error *ngIf="contactemail.invalid">{{getErrorMessage()}}</mat-error> -->
+                </mat-form-field>
+              </div>
+              <div class="column is-3">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Confirm your email" formControlName="confirmcontactemail" required>
                 </mat-form-field>
               </div>
             </div>
