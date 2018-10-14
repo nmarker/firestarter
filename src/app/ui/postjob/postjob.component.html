@@ -1,215 +1,243 @@
 <form [formGroup]="myForm" profileResumeForm path="jobs/1" (stateChange)="changeHandler($event)">
-  <div class="columns">
-    <div class="column is-12">
-      <div class="columns">
-        <div class="column is-10 is-offset-1">
-          <h1 class="head">Post Job</h1>
-          <h4>Let's start with your profile. This will help you succeed on HireMuse.</h4>
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column is-10 is-offset-1">
-          <mat-card>
 
-            <mat-form-field class="example-full-width">
-              <mat-label>Job Title</mat-label>
-              <input matInput placeholder="Candidate Name" formControlName="jobtitle">
-              <mat-hint>Ex: Software Engineer, Product Manager</mat-hint>
-            </mat-form-field>
-              
-            <mat-form-field class="example-full-width">
-              <textarea matInput #jobdescription maxlength="500" placeholder="Job Description" cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15" formControlName="jobdescription"></textarea>
-              <mat-hint align="start"><strong>Regular job duties, expected and performed.</strong>
-              </mat-hint>
-              <mat-hint align="end">{{jobdescription.value.length}} / 500</mat-hint>
-            </mat-form-field>
-            
-            <mat-form-field>
-              <mat-select placeholder="Choose skill" formControlName="skillname">
-                <mat-option value=".NET">.NET</mat-option>
-                <mat-option value="Python">Python</mat-option>
-                <mat-option value="Java">Java</mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <div class="columns">
-              <div class="column is-6">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Current city, state or country</mat-label>
-                  <input #locationinput matInput formControlName="location" type="text" class="google-place-input"
-                    google-place (onSelect)="setAddress($event)" placeholder="Type to search..">
-                  <mat-hint>Current location</mat-hint>
-                </mat-form-field>
-              </div>
-              <div class="column is-6">
-                <mat-checkbox formControlName="canworkremotely">Can work remotely</mat-checkbox>
-              </div>
-            </div>
-            <br>
-
-            <mat-accordion class="example-headers-align">
-              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Other details
-                  </mat-panel-title>
-                  <mat-panel-description class="is-pulled-right	">
-                    Type, experience and role
-                    <mat-icon>account_circle</mat-icon>
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-                <p>I'm visible because I am open</p>
-                <div class="columns">
-                    <div class="column is-5">
-                      <mat-form-field class="example-full-width">
-                        <mat-select placeholder="Job Type" multiple formControlName="jobtype">
-                          <mat-option *ngFor="let job of typesOfJobs" [value]="job">{{job}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="column is-5">
-                      <mat-form-field class="example-full-width">
-                        <mat-select placeholder="Role" multiple formControlName="primaryrole">
-                          <mat-option *ngFor="let role of listRole" [value]="role">{{role}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </div>
-      
-                  <div class="columns">
-                    <div class="column is-5">
-                      <mat-form-field class="example-full-width">
-                        <mat-select placeholder="Work experience" formControlName="workexperience">
-                          <mat-option value="0-1 years">0-1 years</mat-option>
-                          <mat-option value="1-5 years">1-5 years</mat-option>
-                          <mat-option value="5-8 years">5-8 years</mat-option>
-                          <mat-option value="8-15 years">8-15 years</mat-option>
-                          <mat-option value="15+ years">15+ years</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="column is-6"></div>
-                  </div>
-      
-
-                <mat-action-row>
-                  <button mat-button color="primary" (click)="nextStep()">Next</button>
-                </mat-action-row>
-              </mat-expansion-panel>
-
-              <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                      Work Authorization
-                  </mat-panel-title>
-                  <mat-panel-description>
-                    Sponsorship and authorization
-                    <mat-icon>map</mat-icon>
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-
-                <h6>Are you legally authorized to work in the United
-                    States</h6>
-                  <mat-radio-group formControlName="legallyauthorized">
-                    <mat-radio-button value="Yes">Yes</mat-radio-button>
-                    <mat-radio-button value="No">No</mat-radio-button>
-                  </mat-radio-group>
-                  <h6>Do you or will you require sponsorship for a US
-                    employment visa</h6>
-                  <mat-radio-group formControlName="requiresponsorship">
-                    <mat-radio-button value="Yes">Yes</mat-radio-button>
-                    <mat-radio-button value="No">No</mat-radio-button>
-                  </mat-radio-group>
-
-                <mat-action-row>
-                  <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                  <button mat-button color="primary" (click)="nextStep()">Next</button>
-                </mat-action-row>
-              </mat-expansion-panel>
-
-              <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Day of the trip
-                  </mat-panel-title>
-                  <mat-panel-description>
-                    Inform the date you wish to travel
-                    <mat-icon>date_range</mat-icon>
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-
-                <mat-form-field>
-                  <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
-                </mat-form-field>
-                <mat-datepicker #picker></mat-datepicker>
-
-                <mat-action-row>
-                  <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                  <button mat-button color="primary" (click)="nextStep()">End</button>
-                </mat-action-row>
-              </mat-expansion-panel>
-
-            </mat-accordion>
-
-            <br><br>
-            <div class="columns">
-              <div class="column is-6">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Your name</mat-label>
-                  <input matInput formControlName="contactname" type="text" placeholder="Job contact name.">
-                  <mat-hint>Job posted by name</mat-hint>
-                </mat-form-field>
-              </div>
-              <div class="column is-6">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Your company name</mat-label>
-                  <input matInput formControlName="companyname" type="text" placeholder="Company name.">
-                  <mat-hint>Company name</mat-hint>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="columns">
-              <div class="column is-3">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Contact phone number</mat-label>
-                  <input matInput formControlName="contactphonenumber1" type="text" placeholder="Phone number">
-                  <mat-hint>Contact phone number</mat-hint>
-                </mat-form-field>
-              </div>
-              <div class="column is-3">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Alternate phone number</mat-label>
-                  <input matInput formControlName="contactphonenumber2" type="text" placeholder="Alternate phone number">
-                  <mat-hint>Alternate phone number</mat-hint>
-                </mat-form-field>
-              </div>
-              <div class="column is-3">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Enter your email" formControlName="contactemail" required>
-                  <!-- <mat-error *ngIf="contactemail.invalid">{{getErrorMessage()}}</mat-error> -->
-                </mat-form-field>
-              </div>
-              <div class="column is-3">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Confirm your email" formControlName="confirmcontactemail" required>
-                </mat-form-field>
-              </div>
-            </div>
-            <br>
-
-            <br><br><br>
-            <div class="columns is-mobile is-centered">
-              <div class="column is-half">
-                <button class="example-full-width" mat-raised-button color="primary">Save & continue</button>
-              </div>
-            </div>
-
-          </mat-card>
-        </div>
-      </div>
+<div class="columns">
+  <div class="column is-narrow" style="background-color:#f4f5f7; ">
+    <div class="" style="width: 55px;">
+      <mat-toolbar style="background-color: transparent">
+          <mat-toolbar-row>
+            <button mat-icon-button color="blue">
+              <mat-icon class="example-icon">description</mat-icon>
+            </button>
+          </mat-toolbar-row>
+          <mat-toolbar-row>
+            <button mat-icon-button color="">
+              <mat-icon aria-label="">note_add</mat-icon>
+            </button>
+          </mat-toolbar-row>
+          <mat-toolbar-row>
+            <button mat-icon-button color="">
+              <mat-icon class="example-icon">delete</mat-icon>
+            </button>
+          </mat-toolbar-row>
+        </mat-toolbar>
     </div>
-
   </div>
+  <div class="column">
+    
+      <div class="columns">
+          <div class="column is-12">
+            <div class="columns">
+              <div class="column is-10 is-offset-1">
+                <h1 class="head">Post Job!!</h1>
+                <h4>Let's start with your profile. This will help you succeed on HireMuse.</h4>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column is-10 is-offset-1">
+                <mat-card>
+    
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Job Title</mat-label>
+                    <input matInput placeholder="Candidate Name" formControlName="jobtitle">
+                    <mat-hint>Ex: Software Engineer, Product Manager</mat-hint>
+                  </mat-form-field>
+                    
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput #jobdescription maxlength="500" placeholder="Job Description" cdkTextareaAutosize
+                      #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15" formControlName="jobdescription"></textarea>
+                    <mat-hint align="start"><strong>Regular job duties, expected and performed.</strong>
+                    </mat-hint>
+                    <mat-hint align="end">{{jobdescription.value.length}} / 500</mat-hint>
+                  </mat-form-field>
+                  
+                  <mat-form-field>
+                    <mat-select placeholder="Choose skill" formControlName="skillname">
+                      <mat-option value=".NET">.NET</mat-option>
+                      <mat-option value="Python">Python</mat-option>
+                      <mat-option value="Java">Java</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+    
+                  <div class="columns">
+                    <div class="column is-6">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Current city, state or country</mat-label>
+                        <input #locationinput matInput formControlName="location" type="text" class="google-place-input"
+                          google-place (onSelect)="setAddress($event)" placeholder="Type to search..">
+                        <mat-hint>Current location</mat-hint>
+                      </mat-form-field>
+                    </div>
+                    <div class="column is-6">
+                      <mat-checkbox formControlName="canworkremotely">Can work remotely</mat-checkbox>
+                    </div>
+                  </div>
+                  <br>
+    
+                  <mat-accordion class="example-headers-align">
+                    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Other details
+                        </mat-panel-title>
+                        <mat-panel-description class="is-pulled-right	">
+                          Type, experience and role
+                          <mat-icon>account_circle</mat-icon>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p>I'm visible because I am open</p>
+                      <div class="columns">
+                          <div class="column is-5">
+                            <mat-form-field class="example-full-width">
+                              <mat-select placeholder="Job Type" multiple formControlName="jobtype">
+                                <mat-option *ngFor="let job of typesOfJobs" [value]="job">{{job}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="column is-5">
+                            <mat-form-field class="example-full-width">
+                              <mat-select placeholder="Role" multiple formControlName="primaryrole">
+                                <mat-option *ngFor="let role of listRole" [value]="role">{{role}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+            
+                        <div class="columns">
+                          <div class="column is-5">
+                            <mat-form-field class="example-full-width">
+                              <mat-select placeholder="Work experience" formControlName="workexperience">
+                                <mat-option value="0-1 years">0-1 years</mat-option>
+                                <mat-option value="1-5 years">1-5 years</mat-option>
+                                <mat-option value="5-8 years">5-8 years</mat-option>
+                                <mat-option value="8-15 years">8-15 years</mat-option>
+                                <mat-option value="15+ years">15+ years</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="column is-6"></div>
+                        </div>
+            
+    
+                      <mat-action-row>
+                        <button mat-button color="primary" (click)="nextStep()">Next</button>
+                      </mat-action-row>
+                    </mat-expansion-panel>
+    
+                    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Work Authorization
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          Sponsorship and authorization
+                          <mat-icon>map</mat-icon>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+    
+                      <h6>Are you legally authorized to work in the United
+                          States</h6>
+                        <mat-radio-group formControlName="legallyauthorized">
+                          <mat-radio-button value="Yes">Yes</mat-radio-button>
+                          <mat-radio-button value="No">No</mat-radio-button>
+                        </mat-radio-group>
+                        <h6>Do you or will you require sponsorship for a US
+                          employment visa</h6>
+                        <mat-radio-group formControlName="requiresponsorship">
+                          <mat-radio-button value="Yes">Yes</mat-radio-button>
+                          <mat-radio-button value="No">No</mat-radio-button>
+                        </mat-radio-group>
+    
+                      <mat-action-row>
+                        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                        <button mat-button color="primary" (click)="nextStep()">Next</button>
+                      </mat-action-row>
+                    </mat-expansion-panel>
+    
+                    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Day of the trip
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          Inform the date you wish to travel
+                          <mat-icon>date_range</mat-icon>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+    
+                      <mat-form-field>
+                        <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
+                      </mat-form-field>
+                      <mat-datepicker #picker></mat-datepicker>
+    
+                      <mat-action-row>
+                        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                        <button mat-button color="primary" (click)="nextStep()">End</button>
+                      </mat-action-row>
+                    </mat-expansion-panel>
+    
+                  </mat-accordion>
+    
+                  <br><br>
+                  <div class="columns">
+                    <div class="column is-6">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Your name</mat-label>
+                        <input matInput formControlName="contactname" type="text" placeholder="Job contact name.">
+                        <mat-hint>Job posted by name</mat-hint>
+                      </mat-form-field>
+                    </div>
+                    <div class="column is-6">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Your company name</mat-label>
+                        <input matInput formControlName="companyname" type="text" placeholder="Company name.">
+                        <mat-hint>Company name</mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="columns">
+                    <div class="column is-3">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Contact phone number</mat-label>
+                        <input matInput formControlName="contactphonenumber1" type="text" placeholder="Phone number">
+                        <mat-hint>Contact phone number</mat-hint>
+                      </mat-form-field>
+                    </div>
+                    <div class="column is-3">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Alternate phone number</mat-label>
+                        <input matInput formControlName="contactphonenumber2" type="text" placeholder="Alternate phone number">
+                        <mat-hint>Alternate phone number</mat-hint>
+                      </mat-form-field>
+                    </div>
+                    <div class="column is-3">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Enter your email" formControlName="contactemail" required>
+                        <!-- <mat-error *ngIf="contactemail.invalid">{{getErrorMessage()}}</mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="column is-3">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Confirm your email" formControlName="confirmcontactemail" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <br>
+    
+                  <br><br><br>
+                  <div class="columns is-mobile is-centered">
+                    <div class="column is-half">
+                      <button class="example-full-width" mat-raised-button color="primary">Save & continue</button>
+                    </div>
+                  </div>
+    
+                </mat-card>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+  </div>
+</div>
+
 
 </form>
