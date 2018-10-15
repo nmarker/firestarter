@@ -123,7 +123,7 @@ export class PostjobComponent implements OnInit {
       
       //this.myForm.addControl('location', new FormControl('formatted_address'));
       
-      this.myForm.addControl('locationname', new FormControl(addrObj, Validators.required));
+      //this.myForm.addControl('locationname', new FormControl(addrObj, Validators.required));
       //this.state = 'modified';
     });
   }
