@@ -12,4 +12,20 @@ export class LookingComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
+  step = 1;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
 }
