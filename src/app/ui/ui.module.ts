@@ -39,7 +39,7 @@ import { PreviewComponent } from './onboarding/preview/preview.component';
 import { GooglePlacesDirective } from './google-places.directive';
 import { SearchcandidatesComponent } from './searchcandidates/searchcandidates.component';
 import { OnboardingprofileComponent } from './onboarding/onboardingprofile/onboardingprofile.component';
-
+import { BuilderComponent } from './onboarding/builder/builder.component';
 //import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 //import 'rxjs/Rx';
 
@@ -86,7 +86,8 @@ import { OnboardingprofileComponent } from './onboarding/onboardingprofile/onboa
     PreviewComponent,
     GooglePlacesDirective,
     SearchcandidatesComponent,
-    OnboardingprofileComponent
+    OnboardingprofileComponent,
+    BuilderComponent
   ],
   exports: [
     MainNavComponent,

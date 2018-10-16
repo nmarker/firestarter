@@ -22,6 +22,7 @@ import { OnboardingprofileComponent } from './ui/onboarding/onboardingprofile/on
 
 import { SearchcandidatesComponent } from './ui/searchcandidates/searchcandidates.component';
 import { PreferencesComponent } from './ui/onboarding/preferences/preferences.component';
+import { BuilderComponent } from './ui/onboarding/builder/builder.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -41,7 +42,8 @@ const routes: Routes = [
   { path: 'onboarding/looking', component: LookingComponent},
   { path: 'searchcandidates', component: SearchcandidatesComponent},
   { path: 'onboarding/profile', component: OnboardingprofileComponent},
-  { path: 'onboarding/preferences', component: PreferencesComponent}
+  { path: 'onboarding/preferences', component: PreferencesComponent},
+  { path: 'onboarding/builder', component: BuilderComponent}
 ];
 
 @NgModule({
