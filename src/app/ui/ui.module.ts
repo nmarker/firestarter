@@ -29,6 +29,7 @@ import { AdListingComponent } from './ad-listing/ad-listing.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DialogOverviewExampleDialog} from './profile/profile.component';
 import { DialogContentExampleDialog } from './profileresume/profileresume.component';
+import { DeleteDialog } from './addresume/addresume.component';
 import { ProfileresumeComponent } from './profileresume/profileresume.component';
 import { LocationComponent } from './onboarding/location/location.component';
 import { WelcomeComponent } from './onboarding/welcome/welcome.component';
@@ -76,6 +77,7 @@ import { OnboardingprofileComponent } from './onboarding/onboardingprofile/onboa
     ProfileComponent,
     DialogOverviewExampleDialog,
     DialogContentExampleDialog,
+    DeleteDialog,
     ProfileresumeComponent,
     LocationComponent,
     WelcomeComponent,
@@ -93,7 +95,7 @@ import { OnboardingprofileComponent } from './onboarding/onboardingprofile/onboa
     UserProfileComponent,
     UserFormComponent
   ],
-  entryComponents: [ DialogOverviewExampleDialog, DialogContentExampleDialog],
+  entryComponents: [ DialogOverviewExampleDialog, DialogContentExampleDialog, DeleteDialog],
   providers: []
 })
 export class UiModule {}

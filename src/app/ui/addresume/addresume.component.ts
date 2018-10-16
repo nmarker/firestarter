@@ -291,7 +291,7 @@ export class AddresumeComponent implements OnInit {
   openDialog(deltype: string, todelete:number) {
     //const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
-    const dialogRef = this.dialog.open(DialogContentExampleDialog, {
+    const dialogRef = this.dialog.open(DeleteDialog, {
       data: {
         deletetype: deltype,
         displaytext: 'todelete id: ' + todelete
@@ -436,6 +436,6 @@ export class AddresumeComponent implements OnInit {
   selector: 'dialog-content-example-dialog',
   templateUrl: 'dialog-content-example-dialog.html',
 })
-export class DialogContentExampleDialog { 
+export class DeleteDialog { 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }
