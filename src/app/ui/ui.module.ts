@@ -19,7 +19,7 @@ import { MatButtonModule, MatCheckboxModule, MatMenuModule, MatInputModule, MatS
   MatToolbarModule, MatDialogModule, MatSidenavModule, MatNativeDateModule, MatExpansionModule,
   MatCardModule, MatTabsModule, MatIconModule, MatPaginatorModule, MatFormFieldModule, MatRadioModule, MatIcon, MatListOption,
   MatSortModule, MatTableModule, MatGridListModule, MatInput, MatSelectModule, MatDialog, MatDatepickerModule, MatListModule,
-  MatTooltipModule } from '@angular/material';
+  MatTooltipModule, MatStepperModule } from '@angular/material';
 import { FireFormDirective } from './fire-form.directive';
 import { ProfileResumeFormDirective } from './profile-resume-form.directive';
 import { AddresumeComponent } from './addresume/addresume.component';
@@ -55,7 +55,7 @@ import { OnboardingprofileComponent } from './onboarding/onboardingprofile/onboa
     MatIconModule, MatFormFieldModule, MatDatepickerModule,
     MatTableModule, MatPaginatorModule, MatSortModule, 
     MatPaginatorModule, MatGridListModule, MatSelectModule, MatListModule,
-    MatTabsModule, MatIconModule, MatTooltipModule,
+    MatTabsModule, MatIconModule, MatTooltipModule, MatStepperModule
     //Ng4GeoautocompleteModule.forRoot()
   ],
   declarations: [

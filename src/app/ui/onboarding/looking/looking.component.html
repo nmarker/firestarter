@@ -7,97 +7,62 @@
     </div>
     <div class="columns">
       <div class="column is-10 is-offset-1">
-
-
-        <!-- <mat-accordion class="example-headers-align">
-          
-          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Job search location
-              </mat-panel-title>
-              <mat-panel-description class="is-pulled-right	">
-                Type, experience and role
-                <mat-icon>account_circle</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <p>I'm visible because I am open</p>
-            <mat-action-row>
-              <button mat-button color="primary" (click)="nextStep()">Next</button>
-            </mat-action-row>
-          </mat-expansion-panel>
-          
-          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Other details
-              </mat-panel-title>
-              <mat-panel-description class="is-pulled-right	">
-                Type, experience and role
-                <mat-icon>account_circle</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <p>I'm visible because I am open</p>
-            <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-              <button mat-button color="primary" (click)="nextStep()">Next</button>
-            </mat-action-row>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Work Authorization
-              </mat-panel-title>
-              <mat-panel-description>
-                Sponsorship and authorization
-                <mat-icon>map</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <mat-action-row>
-              <button mat-button color="warn" (click)="prevStep()">Previous</button>
-              <button mat-button color="primary" (click)="nextStep()">Next</button>
-            </mat-action-row>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Day of the trip
-              </mat-panel-title>
-              <mat-panel-description>
-                Inform the date you wish to travel
-                <mat-icon>date_range</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
-              </mat-action-row>
-          </mat-expansion-panel>
-          </mat-accordion> -->
-
+          <mat-card>
+          <mat-vertical-stepper [linear]="isLinear" #stepper>
+              <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                  <ng-template matStepLabel>Fill out your name</ng-template>
+                  
+                      <h5 class="hiremusefont">Apply privately. No middlemen. Build your network and future team.</h5>
+                      <mat-divider></mat-divider>
+                      <br>
+                      <div class="columns is-centered">
+                        <div class="column is-5">
+                          <mat-radio-group class="example-radio-group" >
+                            <mat-radio-button class="example-radio-button" value="1">Yes, Actively looking</mat-radio-button>
+                            <mat-radio-button class="example-radio-button" value="2">No, NOT actively</mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+                      </div>
+                      <div class="columns is-mobile is-centered">
+                        <div class="column is-5">
+                          <button class="example-full-width" mat-raised-button color="primary">Save & continue</button>
+                          <br><br>
+                          <a mat-button class="example-full-width" [routerLink]="['/onboarding/profile']">Skip for now >></a>
+                        </div>
+                      </div>
+                    
+                  <div>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup">
+                <form [formGroup]="secondFormGroup">
+                  <ng-template matStepLabel>Fill out your address</ng-template>
+                  <mat-form-field>
+                    <input matInput placeholder="Address" formControlName="secondCtrl" required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                You are now done.
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button (click)="stepper.reset()">Reset</button>
+                </div>
+              </mat-step>
+            </mat-vertical-stepper>
+          </mat-card>
             
-            <mat-card>
-              <h5 class="hiremusefont">Apply privately. No middlemen. Build your network and future team.</h5>
-              <mat-divider></mat-divider>
-              <br>
-              <div class="columns is-centered">
-                <div class="column is-5">
-                  <mat-radio-group class="example-radio-group" >
-                    <mat-radio-button class="example-radio-button" value="1">Yes, Actively looking</mat-radio-button>
-                    <mat-radio-button class="example-radio-button" value="2">No, NOT actively</mat-radio-button>
-                  </mat-radio-group>
-                </div>
-              </div>
-              <div class="columns is-mobile is-centered">
-                <div class="column is-5">
-                  <button class="example-full-width" mat-raised-button color="primary">Save & continue</button>
-                  <br><br>
-                  <a mat-button class="example-full-width" [routerLink]="['/onboarding/profile']">Skip for now >></a>
-                </div>
-              </div>
-            </mat-card>
+            
+            
+            
       </div>
     </div>
   </div>
