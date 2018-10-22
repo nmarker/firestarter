@@ -11,12 +11,19 @@ import { tap, first, take } from 'rxjs/operators';
 export class BuilderComponent implements OnInit {
 
   fruits: Array<string> = ["apple", "pear", "kiwi", "banana", "grape", "strawberry", "grapefruit", "melon", "mango", "plum"];
+  typesOfJobs: string[] = ['Full time employee', 'Contractor', 'Intern'];
+  skillList: string[]= ['.NET', 'Python', 'Django'];
+  state: string;
 
+  myForm: FormGroup;
   formGroup: FormGroup;
   myDoc;
-  state: string;
   nameFormGroup: FormGroup;
   emailFormGroup: FormGroup;
+
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
   steps = [
     {label: 'Confirm your name', content: 'Last name, First name.'},
@@ -31,30 +38,25 @@ export class BuilderComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, private afs: AngularFirestore, private zone: NgZone) { }
 
   ngOnInit() {
-    this.formGroup = this._formBuilder.group({
-      formArray: this._formBuilder.array([
-        this._formBuilder.group({
-          firstNameFormCtrl: ['', Validators.required],
-          lastNameFormCtrl: ['', Validators.required],
-        }),
-        this._formBuilder.group({
-          emailFormCtrl: ['', Validators.email]
-        }),
-      ])
-    });
 
-    this.myDoc = this.afs.doc('location/500').valueChanges();
+    this.firstFormGroup = this._formBuilder.group({
+      name: ['', Validators.required],
+      email: [''],
+      role: [''],
+      location: [''],
+      miniresume: ['']
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      jobsearchstatus: ['', Validators.required],
+      jobtype: [''],
+      desiredannualsalary: [''],
+      desiredlocation: [''],
+      opentoworkremotely: [''],
+
+    });
 
     this.preloadData()
     
-    this.nameFormGroup = this._formBuilder.group({
-      firstNameCtrl: ['', Validators.required],
-      lastNameCtrl: ['', Validators.required],
-    });
-
-    this.emailFormGroup = this._formBuilder.group({
-      emailCtrl: ['', Validators.email]
-    });
   }
 
   changeHandler(e) {
@@ -72,11 +74,17 @@ export class BuilderComponent implements OnInit {
         if (data) {
           console.log(JSON.stringify(data));
 
-          this.formGroup.controls['location'].setValue(data['location'])
+          this.firstFormGroup.controls['name'].setValue(data['name'])
+          this.firstFormGroup.controls['location'].setValue(data['location'])
+          this.firstFormGroup.controls['miniresume'].setValue(data['miniresume'])
           
         }
       }),take(1)
     )
     .subscribe()
+  }
+
+  setAddress(addrObj) {
+    this.firstFormGroup.controls['location'].setValue(addrObj['formatted_address'])
   }
 }

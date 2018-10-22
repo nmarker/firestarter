@@ -13,7 +13,8 @@ export class LocationComponent implements OnInit {
   public title = 'Places';
   public addrKeys: string[];
   public addr: object;
-  
+  public addressList: string[] = [];
+
   myForm: FormGroup;
   myDoc;
   state: string;
@@ -30,9 +31,9 @@ export class LocationComponent implements OnInit {
       console.log(addrObj['formatted_address'])
       //this.myForm.controls['location'].setValue(addrObj)
       this.myForm.controls['location'].setValue(addrObj['formatted_address'])
-      
+      this.myForm.controls['location'].setValue('');
       //this.myForm.addControl('location', new FormControl('formatted_address'));
-      
+      this.addressList.push(addrObj['formatted_address'])
       this.myForm.addControl('locationname', new FormControl(addrObj, Validators.required));
       //this.state = 'modified';
     });
@@ -52,7 +53,9 @@ export class LocationComponent implements OnInit {
     this.preloadData()
   }
 
-
+  showInfo(location){
+    console.log(location)
+  }
   changeHandler(e) {
     console.log(e)
     //this.state = e;

@@ -12,6 +12,16 @@
     <div class="columns">
       <div class="column is-10 is-offset-1">
           <mat-card>
+
+              <mat-nav-list>
+                <mat-list-item *ngFor="let location of addressList">
+                    {{ location }}
+                    <button mat-icon-button (click)="showInfo(location)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-list-item>
+              </mat-nav-list>
+              <br><br>
               <mat-form-field class="example-full-width">
                   <mat-label>Current city, state or country</mat-label>
                   <input 

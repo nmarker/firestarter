@@ -1,47 +1,151 @@
-<h3>Linear Vertical Stepper Demo using a single form</h3>
-<form [formGroup]="formGroup" profileResumeForm path="location/500" (stateChange)="changeHandler($event)">
-  <mat-vertical-stepper #linearVerticalStepper="matVerticalStepper" formArrayName="formArray" [linear]="false">
-    <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <mat-label>First name</mat-label>
-        <input matInput formControlName="firstNameFormCtrl" required>
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Last name</mat-label>
-        <input matInput formControlName="lastNameFormCtrl" required>
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
+<div class="columns">
+  <div class="column is-12">
+    <div class="columns">
+      <div class="column is-10 is-offset-1">
+        <h1 class="head">Onboarding</h1>
       </div>
-    </mat-step>
+    </div>
+    <div class="columns">
+      <div class="column is-10 is-offset-1">
+        <mat-card>
+          <mat-vertical-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup" profileResumeForm path="location/500" (stateChange)="changeHandler($event)">
+                <ng-template matStepLabel>Basic resume information</ng-template>
+                <div class="columns">
+                  <div class="column  is-two-thirds">
+                    <mat-form-field>
+                      <mat-label>Candidate Name</mat-label>
+                      <input matInput placeholder="Candidate Name" formControlName="name">
+                      <mat-hint>Candidate Name</mat-hint>
+                    </mat-form-field>
 
-    <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
-      <ng-template matStepLabel>
-        <div>Fill out your email address</div>
-      </ng-template>
-      <mat-form-field>
-        <mat-label>Email address</mat-label>
-        <input matInput formControlName="emailFormCtrl">
-        <mat-error>The input is invalid.</mat-error>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+                    <mat-form-field>
+                      <input matInput placeholder="email" formControlName="email">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <mat-label>Location</mat-label>
+                      <input matInput formControlName="location" type="text" class="google-place-input" google-place
+                        (onSelect)="setAddress($event)" placeholder="Type to search..">
+                      <mat-hint>Candidate Name</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <textarea matInput #message maxlength="256" placeholder="Mini Resume" formControlName="miniresume"></textarea>
+                      <mat-hint align="start"><strong>Don't disclose personal info</strong>
+                      </mat-hint>
+                      <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <input matInput placeholder="Role" formControlName="role">
+                    </mat-form-field>
+
+                  </div>
+                  <div class="column">
+                    <br>
+                    <article class="tile is-child notification is-info">
+                      <p class="subtitle">Candidate information</p>
+                      <p class="content">Provide your name, location, mini resume.</p>
+                    </article>
+                  </div>
+                </div>
+
+                <div>
+                  <button mat-raised-button color="primary" matStepperNext>Next <i class="material-icons">navigate_next</i></button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup">
+              <form [formGroup]="secondFormGroup" profileResumeForm path="location/500" (stateChange)="changeHandler($event)">
+                <ng-template matStepLabel>Talent profile</ng-template>
+
+                <div class="columns">
+                  <div class="column is-two-thirds">
+                    <mat-form-field>
+                      <mat-select placeholder="Job Search Status" [(value)]="selected" formControlName="jobsearchstatus">
+                        <mat-option value="Actively Interviewing">Actively
+                          Interviewing</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <mat-select placeholder="Job Type" multiple formControlName="jobtype">
+                        <mat-option *ngFor="let job of typesOfJobs" [value]="job">{{job}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <input matInput formControlName="desiredannualsalary" placeholder="Desired Annual Salary" type="number"
+                        class="example-right-align">
+                      <span matPrefix>$&nbsp;</span>
+                      <span matSuffix>.00</span>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <input matInput placeholder="Desired Location" type="text" formControlName="desiredlocation">
+                    </mat-form-field>
+                    <br>
+                    <mat-checkbox formControlName="opentoworkremotely">Open to work
+                      remotely</mat-checkbox>
+
+
+                  </div>
+
+                  <div class="column">
+                    <article class="tile is-child notification is-info">
+                      <p class="subtitle">Talent profile</p>
+                      <p class="content">Provide your name, location, mini resume.</p>
+                    </article>
+                  </div>
+                </div>
+
+                <div>
+                  <button mat-raised-button matStepperPrevious>Back <i class="material-icons">navigate_before</i></button>
+                  <button mat-raised-button color="primary" matStepperNext>Next <i class="material-icons">navigate_next</i></button>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="thirdFormGroup">
+                <form [formGroup]="thirdFormGroup" profileResumeForm path="location/500" (stateChange)="changeHandler($event)">
+                  <ng-template matStepLabel>Skills</ng-template>
+  
+                  <div class="columns">
+                    <div class="column is-two-thirds">
+                      jnf jdn jdndnf
+                    </div>
+                  
+                    <div class="column">
+                      <article class="tile is-child notification is-info">
+                        <p class="subtitle">Talent profile</p>
+                        <p class="content">Provide your name, location, mini resume.</p>
+                      </article>
+                    </div>
+                  </div>
+  
+                  <div>
+                    <button mat-raised-button matStepperPrevious>Back <i class="material-icons">navigate_before</i></button>
+                    <button mat-raised-button color="primary" matStepperNext>Next <i class="material-icons">navigate_next</i></button>
+                  </div>
+                </form>
+              </mat-step>
+
+
+            <mat-step>
+              <ng-template matStepLabel>Done</ng-template>
+              You are now done.
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+              </div>
+            </mat-step>
+          </mat-vertical-stepper>
+
+        </mat-card>
       </div>
-    </mat-step>
+    </div>
+  </div>
 
-    <mat-step>
-      <ng-template matStepLabel>Confirm your information</ng-template>
-      Everything seems correct.
-      <div>
-        <button mat-button>Done</button>
-        <button type="button" mat-button (click)="linearVerticalStepper.reset()">Reset</button>
-      </div>
-    </mat-step>
-  </mat-vertical-stepper>
-</form>
-
+</div>
